@@ -142,6 +142,11 @@ public class telaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSenhaActionPerformed
 
     private void loginCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginCadastrarActionPerformed
+     
+        Cadastro cadastro = new Cadastro();
+        cadastro.show();
+        
+        telaLogin.this.dispose();
         
     }//GEN-LAST:event_loginCadastrarActionPerformed
 
