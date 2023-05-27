@@ -1,11 +1,18 @@
 package bancopotencia;
+
+import java.util.Date;
+
 public class ContaCorrente extends Conta{
     private double limite = 500;
     private double taxa = 0.10;
     private double SaldoLimite;
 
-    public  <Titular> ContaCorrente(Titular TipoPessoa, Integer Saldo, Integer senha) {
-        super(TipoPessoa, Saldo, senha);
+    public ContaCorrente(double taxa, double SaldoLimite, String idConta, double saldo, String tipoPessoa, int operacao, Date dataMovimentacao, String senha, Cliente cliente,
+                 Cliente nome, Cliente sobrenome, Cliente dataNascimento, Agencia idAgencia){
+        super(idConta, saldo, tipoPessoa, operacao, dataMovimentacao, senha, cliente,
+                 nome, sobrenome, dataNascimento, idAgencia);
+        this.taxa = taxa;
+        this.SaldoLimite = SaldoLimite;
     }
 
     public double getLimite() {
@@ -31,13 +38,13 @@ public class ContaCorrente extends Conta{
     public void setSaldoLimite(double Saldo, double limite) {
         this.SaldoLimite = Saldo + limite;
     }
-    public Boolean sacar(Double valor) {
+    public Boolean sacar(double valor, double saldo) {
         if (valor <= 0 && getSaldoLimite() < valor) return false;
         saldo -= valor + taxa;
         setSaldo(saldo);
         return true;
     }
-    public Boolean depositar(Double valor) {
+    public Boolean depositar(double valor, double saldo) {
         if (valor <= 0) return false;
         saldo += (valor - taxa);
         setSaldo(saldo);

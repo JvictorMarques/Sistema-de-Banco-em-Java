@@ -17,12 +17,12 @@ public class Cliente {
 	Contato contato;
 	Conta conta;
 	 
-	public Cliente(double renda, String dataNascimento, Endereco end, Contato contado, Conta conta){
+	public Cliente(double renda, String dataNascimento){ //, Endereco endereco, Contato contado, Conta conta
 		this.renda = renda;
 		this.dataNascimento = dataNascimento;
-		Endereco this.endereco = new Endereco(end.getId, end.getRua, end.getCep, end.getCidade, end.getEstado, end.getNumero);
-		Contato this.contato = new contato(contato.getEmail, contato.getContato1, contato.getContato2, contato.getId);
-		Conta this.conta = new Conta(conta.getID. conta.getTipo. conta.getSaldo, conta.getOperacao, conta.getDataMovimentacao, conta.getTipoMovimentacao, conta.getHistorico, conta.getSenha);
+		//Endereco endereco = new Endereco(endereco.getIdEndereco, endereco.getRua, endereco.getCep, endereco.getCidade, endereco.getEstado, endereco.getNumero);
+		//Contato contato = new Contato(contato.getEmail, contato.getContato1, contato.getContato2, contato.getId);
+		//Conta conta = new Conta(conta.getID. conta.getTipo. conta.getSaldo, conta.getOperacao, conta.getDataMovimentacao, conta.getTipoMovimentacao, conta.getHistorico, conta.getSenha);
 	}
 	
 	public String getDataNascimento() {

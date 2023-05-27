@@ -14,6 +14,7 @@ public class Endereco {
         this.cidade = cidade;
         this.estado = estado;
         this.numero = numero;
+        this.idEndereco = idEndereco;
     }
 
     public void setCep(String cep) {
@@ -34,7 +35,7 @@ public class Endereco {
     public void setIdEndereco(int idEndereco) {
         this.idEndereco = idEndereco;
     }
-    public int getidEndereco() {
+    public int getIdEndereco() {
         return idEndereco;
     }
     public String getRua() {

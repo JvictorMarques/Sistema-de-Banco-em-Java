@@ -1,9 +1,11 @@
+package bancopotencia;
+
 import java.util.Date;
 
-public class ContaPoupança extends Conta {
+public class ContaPoupanca extends Conta {
     private double rendimentos;
 
-    public ContaPoupança(String idConta, double saldo, String tipoPessoa, int operacao, Date dataMovimentacao, String senha,
+    public ContaPoupanca(String idConta, double saldo, String tipoPessoa, int operacao, Date dataMovimentacao, String senha,
                          Cliente cliente, Cliente nome, Cliente sobrenome, Cliente dataNascimento, Agencia idAgencia) {
         super(idConta, saldo, tipoPessoa, operacao, dataMovimentacao, senha, cliente, nome, sobrenome, dataNascimento, idAgencia);
     }

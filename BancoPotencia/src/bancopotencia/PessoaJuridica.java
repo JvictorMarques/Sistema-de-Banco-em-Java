@@ -8,8 +8,8 @@ public class PessoaJuridica extends Cliente {
 	private String grupoEconomico;
 	private String controleAcionario;
 	
-	public PessoaJuridica(String cnpj, String razaoSocial, String nomeFantasia, String atividadeEconomica, String grupoEconomico, String controleAcionario, String dataNascimento, Endereco end, contato contado, Conta conta) {
-		super(double renda, String dataNascimento, Endereco end, Contato contado, Conta conta);
+	public PessoaJuridica(String cnpj, String razaoSocial, String nomeFantasia, String atividadeEconomica, String grupoEconomico, String controleAcionario, String dataNascimento, double renda) {
+		super(renda, dataNascimento); //, Endereco endereco, Contato contado, Conta conta
 		this.cnpj = cnpj;
 		this.razaoSocial = razaoSocial;
 		this.nomeFantasia = nomeFantasia;

@@ -1,4 +1,5 @@
 package bancopotencia;
+
 public class Contato {
     private String email;
     private int contato1;
