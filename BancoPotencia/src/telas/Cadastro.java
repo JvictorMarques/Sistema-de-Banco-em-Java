@@ -97,6 +97,10 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void botaoPFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPFisicaActionPerformed
         // TODO add your handling code here:
+        cadastroPessoaFisica cadastroFi = new cadastroPessoaFisica();
+        cadastroFi.show();
+        
+        Cadastro.this.dispose();
         
     }//GEN-LAST:event_botaoPFisicaActionPerformed
 
