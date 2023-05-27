@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package telas;
-
+import bancopotencia.BancoPotencia;
 import javax.swing.JOptionPane;
 
 /**
