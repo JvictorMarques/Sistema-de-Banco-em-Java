@@ -32,18 +32,9 @@ public class Conta {
 
     Cliente cliente;
 
-    Cliente nome;
+    Agencia agencia;
 
-    Cliente sobrenome;
-
-    Cliente dataNascimento;
-
-    Agencia idAgencia;
-
-
-
-    public Conta(String idConta, double saldo, String tipoPessoa, int operacao, Date dataMovimentacao, String senha, Cliente cliente,
-                 Cliente nome, Cliente sobrenome, Cliente dataNascimento, Agencia idAgencia){
+    public Conta(String idConta, double saldo, String tipoPessoa, int operacao, Date dataMovimentacao, String senha, Cliente cliente, Agencia agencia){
 
         this.idConta = idConta ;
         this.saldo = saldo;
@@ -51,10 +42,7 @@ public class Conta {
         this.operacao = operacao;
         this.senha = senha;
         this.cliente = cliente;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.dataNascimento = dataNascimento;
-        this.idAgencia = idAgencia;
+        this.agencia = agencia;
    }
 
     public double sacar(double valor){
