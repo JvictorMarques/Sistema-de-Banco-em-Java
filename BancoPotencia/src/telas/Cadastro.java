@@ -89,10 +89,15 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void botaoPJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPJuridicaActionPerformed
         // TODO add your handling code here:
+        cadastroPessoaJuridica cadastroJu = new cadastroPessoaJuridica();
+        cadastroJu.show();
+        
+        Cadastro.this.dispose();
     }//GEN-LAST:event_botaoPJuridicaActionPerformed
 
     private void botaoPFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPFisicaActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_botaoPFisicaActionPerformed
 
     private void voltarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarCadastroActionPerformed

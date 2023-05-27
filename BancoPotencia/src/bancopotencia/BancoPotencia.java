@@ -19,6 +19,7 @@ public class BancoPotencia {
         // TODO code application logic here
        telaLogin telaLoginS = new telaLogin();
         telaLoginS.show();
+       
     }
     
 }
