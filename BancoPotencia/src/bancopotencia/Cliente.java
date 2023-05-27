@@ -14,14 +14,14 @@ public class Cliente {
 	private String dataNascimento;
 	private double renda;
 	Endereco endereco;
-	contato contato;
+	Contato contato;
 	Conta conta;
 	 
-	public Cliente(double renda, String dataNascimento, Endereco end, contato contado, Conta conta){
+	public Cliente(double renda, String dataNascimento, Endereco end, Contato contado, Conta conta){
 		this.renda = renda;
 		this.dataNascimento = dataNascimento;
 		Endereco this.endereco = new Endereco(end.getId, end.getRua, end.getCep, end.getCidade, end.getEstado, end.getNumero);
-		contato this.contato = new contato(contato.getEmail, contato.getContato1, contato.getContato2, contato.getId);
+		Contato this.contato = new contato(contato.getEmail, contato.getContato1, contato.getContato2, contato.getId);
 		Conta this.conta = new Conta(conta.getID. conta.getTipo. conta.getSaldo, conta.getOperacao, conta.getDataMovimentacao, conta.getTipoMovimentacao, conta.getHistorico, conta.getSenha);
 	}
 	

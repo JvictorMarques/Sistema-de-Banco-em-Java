@@ -1,3 +1,4 @@
+package bancopotencia;
 public class ContaCorrente extends Conta{
     private double limite = 500;
     private double taxa = 0.10;
