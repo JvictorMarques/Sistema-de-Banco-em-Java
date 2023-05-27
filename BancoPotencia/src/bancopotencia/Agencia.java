@@ -1,10 +1,12 @@
+package bancopotencia;
+
 public class Agencia {
     private int idAgencia;
     private String localidade;
-    private Contato contato;
+    private contato contato;
     private Endereco endereco;
     
-    public Agencia(int idAgencia, String localidade, Contato contato, Endereco endereco) {
+    public Agencia(int idAgencia, String localidade, contato contato, Endereco endereco) {
         this.idAgencia = idAgencia;
         this.localidade = localidade;
         this.contato = contato;

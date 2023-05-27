@@ -1,3 +1,4 @@
+package bancopotencia;
 
 public class PessoaFisica extends Cliente {
 	private String cpf;
