@@ -5,6 +5,12 @@ public class Contato {
     private int contato1;
     private int contato2;
 
+    public Contato(String email, int contato1, int contato2) {
+        this.email = email;
+        this.contato1 = contato1;
+        this.contato2 = contato2;
+    }
+
 
     public String getEmail() {
         return email;
