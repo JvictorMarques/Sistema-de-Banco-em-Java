@@ -10,7 +10,8 @@ package telas;
  * @author Elder
  */
 public class menuPrincipal extends javax.swing.JFrame {
-
+    saqueTela saque;
+    transferenciaTela transferencia;
     /**
      * Creates new form menuPrincipal
      */
@@ -51,6 +52,11 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jButtonTransferencia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonTransferencia.setText("Transferência");
+        jButtonTransferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTransferenciaActionPerformed(evt);
+            }
+        });
 
         jButtonDeposito.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonDeposito.setText("Deposito");
@@ -154,11 +160,24 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     private void jButtonSaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaqueActionPerformed
         // TODO add your handling code here:
-        saqueTela saque = new saqueTela();
-        saque.setVisible(true);   
-        saque.recebeSaque(jLabelValorSaldo.getText());
+        if(saque == null){
+            saqueTela saque = new saqueTela();
+            saque.setVisible(true);   
+            saque.recebeSaque(jLabelValorSaldo.getText());
+        }
         
     }//GEN-LAST:event_jButtonSaqueActionPerformed
+
+    private void jButtonTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransferenciaActionPerformed
+        // TODO add your handling code here:
+        if(transferencia == null){
+            transferenciaTela transferencia = new transferenciaTela();
+            transferencia.setVisible(true);
+            transferencia.recebeTrans(jLabelValorSaldo.getText());
+        }
+        
+        
+    }//GEN-LAST:event_jButtonTransferenciaActionPerformed
 
     /**
      * @param args the command line arguments
