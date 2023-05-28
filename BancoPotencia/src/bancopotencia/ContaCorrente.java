@@ -6,7 +6,7 @@ public class ContaCorrente extends Conta{
     private double limite = 500;
     private double taxa = 0.10;
     private double SaldoLimite;
-
+    Conta saldo;
     public ContaCorrente(double taxa, double SaldoLimite, String idConta, double saldo, String tipoPessoa, int operacao, Date dataMovimentacao, String senha, Cliente cliente, Agencia agencia){
         super(idConta, saldo, tipoPessoa, operacao, dataMovimentacao, senha, cliente, agencia);
         this.taxa = taxa;
@@ -36,16 +36,26 @@ public class ContaCorrente extends Conta{
     public void setSaldoLimite(double Saldo, double limite) {
         this.SaldoLimite = Saldo + limite;
     }
-    public Boolean sacar(double valor, double saldo) {
-        if (valor <= 0 && getSaldoLimite() < valor) return false;
-        saldo -= valor + taxa;
-        setSaldo(saldo);
-        return true;
+    @Override
+    public double sacar(double valor){
+        double saldo = super.getSaldo();
+        if(valor <= saldo){
+        }else{
+            saldo -= valor + taxa;
+            return saldo;
+
+        }
+        return 0;
     }
-    public Boolean depositar(double valor, double saldo) {
-        if (valor <= 0) return false;
-        saldo += (valor - taxa);
-        setSaldo(saldo);
-        return true;
+    @Override
+    public double depositar(double valor){
+        double saldo = super.getSaldo();
+        if (valor>0){
+        }else{
+            saldo += (valor - taxa);
+            return saldo;
+        }
+        return 0;
     }
 }
+
