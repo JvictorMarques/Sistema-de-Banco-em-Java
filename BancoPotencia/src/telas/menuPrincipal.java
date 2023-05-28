@@ -12,6 +12,7 @@ package telas;
 public class menuPrincipal extends javax.swing.JFrame {
     saqueTela saque;
     transferenciaTela transferencia;
+    depositoTela deposito;
     /**
      * Creates new form menuPrincipal
      */
@@ -60,6 +61,11 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jButtonDeposito.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonDeposito.setText("Deposito");
+        jButtonDeposito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDepositoActionPerformed(evt);
+            }
+        });
 
         jButtonSaque.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonSaque.setText("Saque");
@@ -178,6 +184,14 @@ public class menuPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButtonTransferenciaActionPerformed
+
+    private void jButtonDepositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepositoActionPerformed
+        // TODO add your handling code here:
+        if(deposito == null){
+            depositoTela deposito = new depositoTela();
+            deposito.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonDepositoActionPerformed
 
     /**
      * @param args the command line arguments
