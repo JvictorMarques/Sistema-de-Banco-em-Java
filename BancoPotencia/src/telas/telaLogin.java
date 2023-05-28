@@ -139,7 +139,10 @@ public class telaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(txtLogin.getText().equals("usuario") && txtSenha.getText().equals("123456")){
             menuPrincipal menu = new menuPrincipal();
-            menu.show();
+            menu.setVisible(true);
+            double valor = 500;
+            String resultado = String.format("%.2f", valor);
+            menu.recebeMenu(resultado);
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Sai dai doido");

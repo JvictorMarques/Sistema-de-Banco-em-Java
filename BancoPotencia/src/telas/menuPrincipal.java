@@ -63,6 +63,11 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jButtonSair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSairActionPerformed(evt);
+            }
+        });
 
         jButtonExtrato.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonExtrato.setText("Extrato");
@@ -135,6 +140,13 @@ public class menuPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        telaLogin login = new telaLogin();
+        login.setVisible(true);
+    }//GEN-LAST:event_jButtonSairActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -169,7 +181,9 @@ public class menuPrincipal extends javax.swing.JFrame {
             }
         });
     }
-
+    public void recebeMenu(String recebe){
+        jLabelValorSaldo.setText(recebe);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDeposito;
     private javax.swing.JButton jButtonExtrato;
