@@ -14,6 +14,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     transferenciaTela transferencia;
     depositoTela deposito;
     poupancaTela poupanca;
+    extratoTela extrato;
     /**
      * Creates new form menuPrincipal
      */
@@ -94,6 +95,11 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jButtonExtrato.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonExtrato.setText("Extrato");
+        jButtonExtrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExtratoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,6 +212,16 @@ public class menuPrincipal extends javax.swing.JFrame {
             poupanca.setVisible(true);
         }
     }//GEN-LAST:event_jButtonPoupancaActionPerformed
+
+    private void jButtonExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExtratoActionPerformed
+        // TODO add your handling code here:
+        
+        if(extrato == null){
+            extratoTela extrato = new extratoTela();
+            extrato.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_jButtonExtratoActionPerformed
 
     /**
      * @param args the command line arguments

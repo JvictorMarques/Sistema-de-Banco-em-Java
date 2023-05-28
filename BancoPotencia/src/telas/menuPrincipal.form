@@ -191,6 +191,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Extrato"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExtratoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
