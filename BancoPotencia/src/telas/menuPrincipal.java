@@ -13,6 +13,8 @@ public class menuPrincipal extends javax.swing.JFrame {
     saqueTela saque;
     transferenciaTela transferencia;
     depositoTela deposito;
+    poupancaTela poupanca;
+    extratoTela extrato;
     /**
      * Creates new form menuPrincipal
      */
@@ -77,6 +79,11 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jButtonPoupanca.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonPoupanca.setText("Poupança");
+        jButtonPoupanca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPoupancaActionPerformed(evt);
+            }
+        });
 
         jButtonSair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonSair.setText("Sair");
@@ -88,6 +95,11 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jButtonExtrato.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonExtrato.setText("Extrato");
+        jButtonExtrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExtratoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,6 +204,24 @@ public class menuPrincipal extends javax.swing.JFrame {
             deposito.setVisible(true);
         }
     }//GEN-LAST:event_jButtonDepositoActionPerformed
+
+    private void jButtonPoupancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPoupancaActionPerformed
+        // TODO add your handling code here:
+        if(poupanca == null){
+            poupancaTela poupanca = new poupancaTela();
+            poupanca.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonPoupancaActionPerformed
+
+    private void jButtonExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExtratoActionPerformed
+        // TODO add your handling code here:
+        
+        if(extrato == null){
+            extratoTela extrato = new extratoTela();
+            extrato.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_jButtonExtratoActionPerformed
 
     /**
      * @param args the command line arguments
