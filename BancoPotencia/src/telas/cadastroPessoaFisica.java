@@ -64,6 +64,7 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
         jLabel18.setText("CADASTRO PESSOA JURIDICA");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("CADASTRO PESSOA FISICA");
 
@@ -243,6 +244,7 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
