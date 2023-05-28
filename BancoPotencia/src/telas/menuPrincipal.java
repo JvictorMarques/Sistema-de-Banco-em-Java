@@ -57,6 +57,11 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jButtonSaque.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonSaque.setText("Saque");
+        jButtonSaque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaqueActionPerformed(evt);
+            }
+        });
 
         jButtonPoupanca.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonPoupanca.setText("Poupança");
@@ -146,6 +151,14 @@ public class menuPrincipal extends javax.swing.JFrame {
         telaLogin login = new telaLogin();
         login.setVisible(true);
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jButtonSaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaqueActionPerformed
+        // TODO add your handling code here:
+        saqueTela saque = new saqueTela();
+        saque.setVisible(true);   
+        saque.recebeSaque(jLabelValorSaldo.getText());
+        
+    }//GEN-LAST:event_jButtonSaqueActionPerformed
 
     /**
      * @param args the command line arguments
