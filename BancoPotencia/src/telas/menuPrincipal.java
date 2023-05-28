@@ -13,6 +13,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     saqueTela saque;
     transferenciaTela transferencia;
     depositoTela deposito;
+    poupancaTela poupanca;
     /**
      * Creates new form menuPrincipal
      */
@@ -77,6 +78,11 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jButtonPoupanca.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonPoupanca.setText("Poupança");
+        jButtonPoupanca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPoupancaActionPerformed(evt);
+            }
+        });
 
         jButtonSair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonSair.setText("Sair");
@@ -192,6 +198,14 @@ public class menuPrincipal extends javax.swing.JFrame {
             deposito.setVisible(true);
         }
     }//GEN-LAST:event_jButtonDepositoActionPerformed
+
+    private void jButtonPoupancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPoupancaActionPerformed
+        // TODO add your handling code here:
+        if(poupanca == null){
+            poupancaTela poupanca = new poupancaTela();
+            poupanca.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonPoupancaActionPerformed
 
     /**
      * @param args the command line arguments
