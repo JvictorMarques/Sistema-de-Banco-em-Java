@@ -46,7 +46,6 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jTextCadJuEstado = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextCadJuDataAbertura = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
         jTextCadJuEmail = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -66,6 +65,7 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
         jPasswordSenha = new javax.swing.JPasswordField();
         jPasswordConfirmaSenha = new javax.swing.JPasswordField();
         jLabel18 = new javax.swing.JLabel();
+        jTextCadJuDataAbertura = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -87,8 +87,6 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
         jLabel8.setText("ESTADO: ");
 
         jLabel9.setText("DATA DE ABERTURA: ");
-
-        jTextCadJuDataAbertura.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
 
         jLabel10.setText("E-MAIL: ");
 
@@ -298,17 +296,29 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
         // TODO add your handling code here:
         //VERIFICA SE EXISTE UM CNPJ JA CADASTRADO SE NÃO.
   
-        if(jPasswordSenha.getText().equals(jPasswordConfirmaSenha.getText())){
-     
-                if(ConfirmaCadastro == null){
-                    ConfirmaCadastro = new confirmaCadastro();
-                    cadastroPessoaJuridica.this.dispose();
-                    ConfirmaCadastro.setVisible(true);
-                    ConfirmaCadastro.recebe(jTextCadJuCnpj.getText());
-                }
-            
+        if(jPasswordConfirmaSenha.getText().length()== 0|| jPasswordSenha.getText().length()== 0||
+            jTextCadJuAtividadeEconomica.getText().length()== 0 || jTextCadJuCep.getText().length()== 0||
+            jTextCadJuCidade.getText().length()== 0|| jTextCadJuCnpj.getText().length()== 0||
+            jTextCadJuContato1.getText().length()== 0|| jTextCadJuContato2.getText().length()== 0||
+            jTextCadJuControleAcionario.getText().length()== 0||jTextCadJuDataAbertura.getText().length()== 0||
+            jTextCadJuEmail.getText().length()== 0|| jTextCadJuEstado.getText().length()== 0||
+            jTextCadJuGrupoEconomico.getText().length()== 0||jTextCadJuNomeFantasia.getText().length()== 0||
+            jTextCadJuNumero.getText().length()== 0||jTextCadJuRazSocial.getText().length()== 0||
+            jTextCadJuRua.getText().length()== 0){
+            JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");
         }else{
-            JOptionPane.showMessageDialog(null, "as senhas não correspondem");
+            if(jPasswordSenha.getText().equals(jPasswordConfirmaSenha.getText())){
+
+                    if(ConfirmaCadastro == null){
+                        ConfirmaCadastro = new confirmaCadastro();
+                        cadastroPessoaJuridica.this.dispose();
+                        ConfirmaCadastro.setVisible(true);
+                        ConfirmaCadastro.recebe(jTextCadJuCnpj.getText());
+                    }
+
+            }else{
+                JOptionPane.showMessageDialog(null, "as senhas não correspondem");
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -392,7 +402,7 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
     private javax.swing.JTextField jTextCadJuContato1;
     private javax.swing.JTextField jTextCadJuContato2;
     private javax.swing.JTextField jTextCadJuControleAcionario;
-    private javax.swing.JFormattedTextField jTextCadJuDataAbertura;
+    private javax.swing.JTextField jTextCadJuDataAbertura;
     private javax.swing.JTextField jTextCadJuEmail;
     private javax.swing.JTextField jTextCadJuEstado;
     private javax.swing.JTextField jTextCadJuGrupoEconomico;

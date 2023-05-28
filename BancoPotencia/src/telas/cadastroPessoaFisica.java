@@ -259,16 +259,26 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
         // TODO add your handling code here:
         //verifica se ja existe algum cpf cadastrado com o citado
         
-        if(jPasswordCadFiSenha.getText().equals(jPasswordCadFiConSenha.getText())){
-            if(ConfirmaCadastro == null){
-                    ConfirmaCadastro = new confirmaCadastro();
-                    cadastroPessoaFisica.this.dispose();
-                    ConfirmaCadastro.setVisible(true);
-                    ConfirmaCadastro.recebe(jTextCadFiCpf.getText());
-            }
-            
+        if(jPasswordCadFiConSenha.getText().length()== 0 || jPasswordCadFiSenha.getText().length() == 0 ||
+                jTextCadFiCep.getText().length() == 0|| jTextCadFiCidade.getText().length() == 0||
+                jTextCadFiContato1.getText().length() == 0||jTextCadFiContato2.getText().length() == 0||
+                jTextCadFiCpf.getText().length() == 0||jTextCadFiData.getText().length() == 0||
+                jTextCadFiEmail.getText().length() == 0||jTextCadFiEstado.getText().length() == 0||
+                jTextCadFiNome.getText().length() == 0||jTextCadFiNumero.getText().length() == 0||
+                jTextCadFiRua.getText().length() == 0){
+            JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");
         }else{
-            JOptionPane.showMessageDialog(null, "as senhas não correspondem");
+            if(jPasswordCadFiSenha.getText().equals(jPasswordCadFiConSenha.getText())){
+                if(ConfirmaCadastro == null){
+                        ConfirmaCadastro = new confirmaCadastro();
+                        cadastroPessoaFisica.this.dispose();
+                        ConfirmaCadastro.setVisible(true);
+                        ConfirmaCadastro.recebe(jTextCadFiCpf.getText());
+                }
+
+            }else{
+                JOptionPane.showMessageDialog(null, "as senhas não correspondem");
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
