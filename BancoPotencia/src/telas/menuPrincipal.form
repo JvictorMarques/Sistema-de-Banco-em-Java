@@ -136,6 +136,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Transfer&#xea;ncia"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTransferenciaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonDeposito">
       <Properties>
@@ -144,6 +147,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Deposito"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDepositoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSaque">
       <Properties>

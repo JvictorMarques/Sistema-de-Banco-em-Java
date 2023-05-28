@@ -10,7 +10,9 @@ package telas;
  * @author Elder
  */
 public class menuPrincipal extends javax.swing.JFrame {
-
+    saqueTela saque;
+    transferenciaTela transferencia;
+    depositoTela deposito;
     /**
      * Creates new form menuPrincipal
      */
@@ -51,9 +53,19 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jButtonTransferencia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonTransferencia.setText("Transferência");
+        jButtonTransferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTransferenciaActionPerformed(evt);
+            }
+        });
 
         jButtonDeposito.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonDeposito.setText("Deposito");
+        jButtonDeposito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDepositoActionPerformed(evt);
+            }
+        });
 
         jButtonSaque.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonSaque.setText("Saque");
@@ -154,11 +166,32 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     private void jButtonSaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaqueActionPerformed
         // TODO add your handling code here:
-        saqueTela saque = new saqueTela();
-        saque.setVisible(true);   
-        saque.recebeSaque(jLabelValorSaldo.getText());
+        if(saque == null){
+            saqueTela saque = new saqueTela();
+            saque.setVisible(true);   
+            saque.recebeSaque(jLabelValorSaldo.getText());
+        }
         
     }//GEN-LAST:event_jButtonSaqueActionPerformed
+
+    private void jButtonTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransferenciaActionPerformed
+        // TODO add your handling code here:
+        if(transferencia == null){
+            transferenciaTela transferencia = new transferenciaTela();
+            transferencia.setVisible(true);
+            transferencia.recebeTrans(jLabelValorSaldo.getText());
+        }
+        
+        
+    }//GEN-LAST:event_jButtonTransferenciaActionPerformed
+
+    private void jButtonDepositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepositoActionPerformed
+        // TODO add your handling code here:
+        if(deposito == null){
+            depositoTela deposito = new depositoTela();
+            deposito.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonDepositoActionPerformed
 
     /**
      * @param args the command line arguments
