@@ -138,7 +138,9 @@ public class telaLogin extends javax.swing.JFrame {
     private void loginEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginEntrarActionPerformed
         // TODO add your handling code here:
         if(txtLogin.getText().equals("usuario") && txtSenha.getText().equals("123456")){
-            JOptionPane.showMessageDialog(null, "Entrou");
+            menuPrincipal menu = new menuPrincipal();
+            menu.show();
+            this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Sai dai doido");
         }
