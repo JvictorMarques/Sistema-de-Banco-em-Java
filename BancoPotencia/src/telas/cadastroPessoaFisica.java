@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author Elder
  */
 public class cadastroPessoaFisica extends javax.swing.JFrame {
-
+    confirmaCadastro ConfirmaCadastro;
     /**
      * Creates new form cadastroPessoaFisica
      */
@@ -256,10 +256,14 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //verifica se ja existe algum cpf cadastrado com o citado
+        
         if(jPasswordCadFiSenha.getText().equals(jPasswordCadFiConSenha.getText())){
-            JOptionPane.showMessageDialog(null, "ok");
-            
-            //inserçõs no banco
+            if(ConfirmaCadastro == null){
+                    ConfirmaCadastro = new confirmaCadastro();
+                    cadastroPessoaFisica.this.dispose();
+                    ConfirmaCadastro.setVisible(true);
+                    ConfirmaCadastro.recebe(jTextCadFiCpf.getText());
+            }
             
         }else{
             JOptionPane.showMessageDialog(null, "as senhas não correspondem");
@@ -333,4 +337,8 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
     private javax.swing.JTextField jTextCadFiNumero;
     private javax.swing.JTextField jTextCadFiRua;
     // End of variables declaration//GEN-END:variables
+
+    private Object size(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

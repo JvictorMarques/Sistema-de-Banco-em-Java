@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author Elder
  */
 public class cadastroPessoaJuridica extends javax.swing.JFrame {
-
+    confirmaCadastro ConfirmaCadastro;
     /**
      * Creates new form cadastroPessoaJuridica
      */
@@ -295,10 +295,15 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //VERIFICA SE EXISTE UM CNPJ JA CADASTRADO SE NÃO.
-        
-        
+  
         if(jPasswordSenha.getText().equals(jPasswordConfirmaSenha.getText())){
-            JOptionPane.showMessageDialog(null, "ok");
+     
+                if(ConfirmaCadastro == null){
+                    ConfirmaCadastro = new confirmaCadastro();
+                    cadastroPessoaJuridica.this.dispose();
+                    ConfirmaCadastro.setVisible(true);
+                    ConfirmaCadastro.recebe(jTextCadJuCnpj.getText());
+                }
             
         }else{
             JOptionPane.showMessageDialog(null, "as senhas não correspondem");
@@ -307,7 +312,7 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Cadastro cadastro = new Cadastro();
+       Cadastro cadastro = new Cadastro();
         cadastro.show();
         
         cadastroPessoaJuridica.this.dispose();
@@ -346,6 +351,13 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
                 new cadastroPessoaJuridica().setVisible(true);
             }
         });
+    }
+    
+    //PASSAR DADOS DA CONTA
+    
+    public void recebendo (String recebe){
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
