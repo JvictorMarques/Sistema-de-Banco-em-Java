@@ -6,6 +6,7 @@
 package bancopotencia;
 
 import java.util.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,26 +14,11 @@ import java.util.Date;
  */
 public class Conta {
     private String idConta;
-
     private String tipoPessoa;
-
     private double saldo;
-
     private int operacao;
-
-    private Date dataMovimentacao;
-
-    private double valorMovimentacao;
-
-    private String tipoMovimentacao;
-
-    private String historico; //historico: arrayList(object)
-
     private String senha;
-
-    Cliente cliente;
-
-    Agencia agencia;
+    private ArrayList<Transacao> transacoes = new ArrayList();
 
     public Conta(String idConta, double saldo, String tipoPessoa, int operacao, Date dataMovimentacao, String senha, Cliente cliente, Agencia agencia){
 
@@ -41,8 +27,6 @@ public class Conta {
         this.tipoPessoa = tipoPessoa;
         this.operacao = operacao;
         this.senha = senha;
-        this.cliente = cliente;
-        this.agencia = agencia;
    }
 
     public double sacar(double valor){
@@ -70,10 +54,6 @@ public class Conta {
         return tipoPessoa;
     }
 
-    public void setTipoPessoa(String tipoPessoa) {
-        this.tipoPessoa = tipoPessoa;
-    }
-
     public double getSaldo() {
         return saldo;
     }
@@ -84,42 +64,6 @@ public class Conta {
 
     public int getOperacao() {
         return operacao;
-    }
-
-    public void setOperacao(int operacao) {
-        this.operacao = operacao;
-    }
-
-    public Date getDataMovimentacao() {
-        return dataMovimentacao;
-    }
-
-    public void setDataMovimentacao(Date dataMovimentacao) {
-        this.dataMovimentacao = dataMovimentacao;
-    }
-
-    public double getValorMovimentacao() {
-        return valorMovimentacao;
-    }
-
-    public void setValorMovimentacao(double valorMovimentacao) {
-        this.valorMovimentacao = valorMovimentacao;
-    }
-
-    public String getTipoMovimentacao() {
-        return tipoMovimentacao;
-    }
-
-    public void setTipoMovimentacao(String tipoMovimentacao) {
-        this.tipoMovimentacao = tipoMovimentacao;
-    }
-
-    public String getHistorico() {
-        return historico;
-    }
-
-    public void setHistorico(String historico) {
-        this.historico = historico;
     }
 
     public void extrato (){//no lugar de historico
