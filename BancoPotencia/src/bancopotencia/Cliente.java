@@ -9,20 +9,21 @@ package bancopotencia;
  *
  * @author wgsor
  */
+import java.util.ArrayList;
+
 public class Cliente {
 	
 	private String dataNascimento;
 	private double renda;
 	Endereco endereco;
 	Contato contato;
-	Conta conta;
+	private ArrayList<Conta> contas = new ArrayList<>();
 	 
-	public Cliente(double renda, String dataNascimento, Endereco endereco, Contato contato, Conta conta){
+	public Cliente(double renda, String dataNascimento, Endereco endereco, Contato contato){
 		this.renda = renda;
 		this.dataNascimento = dataNascimento;
 		this.endereco = endereco;
 		this.contato = contato;
-		this.conta = conta;
 	}
 	
 	public String getDataNascimento() {
@@ -39,5 +40,36 @@ public class Cliente {
 	public void setRenda(double renda) {
 		this.renda = renda;
 	}
-	 
+	
+        public void adicionarConta(Conta conta) {
+		this.contas.add(conta);
+	}
+
+	public ArrayList<Conta> getContas(){
+		return contas;
+	}
+	
+	public void listarContas() {
+		System.out.printf("-Contas-\n");
+	    int tamanho = contas.size();
+	    for (int i=0; i<tamanho; i++) {
+	    	System.out.println("\nConta: "+ i +
+	    		  "\nNúmero: "+ contas.get(i).getIdConta()+
+	    		  "\nOperação: "+ contas.get(i).getOperacao()+
+	    		  "\nSaldo: "+ contas.get(i).getSaldo()+
+	    		  "\nPessoa: "+ contas.get(i).getTipoPessoa());
+	    }
+	}
+	
+	public void removerConta(String numeroConta) {
+		int tamanho = contas.size();
+	    for (int i=0; i<tamanho; i++) {
+	    	String id = contas.get(i).getIdConta();
+	    	if(id.equals(numeroConta)){
+	            contas.remove(contas.get(i));
+	            System.out.println("\nConta removida com sucesso!\n");
+	            break;
+	        }
+	    }
+	}
 }

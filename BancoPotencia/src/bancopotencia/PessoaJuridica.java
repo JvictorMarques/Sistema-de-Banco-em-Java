@@ -8,8 +8,8 @@ public class PessoaJuridica extends Cliente {
     private String grupoEconomico;
     private String controleAcionario;
 
-    public PessoaJuridica(String cnpj, String razaoSocial, String nomeFantasia, String atividadeEconomica, String grupoEconomico, String controleAcionario, String dataNascimento, double renda, Endereco endereco, Contato contato, Conta conta) {
-        super(renda, dataNascimento, endereco, contato, conta);
+    public PessoaJuridica(String cnpj, String razaoSocial, String nomeFantasia, String atividadeEconomica, String grupoEconomico, String controleAcionario, String dataNascimento, double renda, Endereco endereco, Contato contato) {
+        super(renda, dataNascimento, endereco, contato);
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
         this.nomeFantasia = nomeFantasia;
@@ -54,21 +54,5 @@ public class PessoaJuridica extends Cliente {
     public void setControleAcionario(String controleAcionario) {
         this.controleAcionario = controleAcionario;
     }
-    public void cadastraPessoaJuridica(String razaoSocial,String nomeFantasia,String cnpj,String cep,String rua,int numero,String cidade,String estado,String dataAbertura,String email,int contato1,int contato2,String atividadeEconomica,String grupoEconomico,String controleAcionario,String senha){
-        setRazaoSocial(razaoSocial);
-        setNomeFantasia(nomeFantasia);
-        setCnpj(cnpj);
-        setAtividadeEconomica(atividadeEconomica);
-        setGrupoEconomico(grupoEconomico);
-        setControleAcionario(controleAcionario);
-        super.setDataNascimento(dataAbertura);
-        endereco.setCep(cep);
-        endereco.setRua(rua);
-        endereco.setNumero(numero);
-        endereco.setCidade(cidade);
-        contato.setEmail(email);
-        contato.setContato1(contato1);
-        contato.setContato2(contato2);
-        conta.setSenha(senha);
-    }
+    
 }
