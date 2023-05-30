@@ -158,7 +158,7 @@ public class telaLogin extends javax.swing.JFrame {
     private void loginCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginCadastrarActionPerformed
      
         Cadastro cadastro = new Cadastro();
-        cadastro.show();
+        cadastro.setVisible(true);
         
         telaLogin.this.dispose();
         

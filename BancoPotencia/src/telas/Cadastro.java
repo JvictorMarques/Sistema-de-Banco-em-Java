@@ -91,7 +91,7 @@ public class Cadastro extends javax.swing.JFrame {
     private void botaoPJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPJuridicaActionPerformed
         // TODO add your handling code here:
         cadastroPessoaJuridica cadastroJu = new cadastroPessoaJuridica();
-        cadastroJu.show();
+        cadastroJu.setVisible(true);
         
         Cadastro.this.dispose();
     }//GEN-LAST:event_botaoPJuridicaActionPerformed
@@ -99,7 +99,7 @@ public class Cadastro extends javax.swing.JFrame {
     private void botaoPFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPFisicaActionPerformed
         // TODO add your handling code here:
         cadastroPessoaFisica cadastroFi = new cadastroPessoaFisica();
-        cadastroFi.show();
+        cadastroFi.setVisible(true);
         
         Cadastro.this.dispose();
         
@@ -109,7 +109,7 @@ public class Cadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
         //voltar para o menu principal
         telaLogin telaLoginS = new telaLogin();
-        telaLoginS.show();
+        telaLoginS.setVisible(true);
         Cadastro.this.dispose();
     }//GEN-LAST:event_voltarCadastroActionPerformed
 

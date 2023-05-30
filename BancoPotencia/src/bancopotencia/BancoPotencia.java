@@ -18,7 +18,7 @@ public class BancoPotencia {
     public static void main(String[] args) {
         // TODO code application logic here
        telaLogin telaLoginS = new telaLogin();
-       telaLoginS.show();
+       telaLoginS.setVisible(true);
        
     }
     

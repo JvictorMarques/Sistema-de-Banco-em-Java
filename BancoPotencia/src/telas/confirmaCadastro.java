@@ -111,7 +111,7 @@ public class confirmaCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
         telaLogin telaLoginS = new telaLogin();
         confirmaCadastro.this.dispose();
-        telaLoginS.show();
+        telaLoginS.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
