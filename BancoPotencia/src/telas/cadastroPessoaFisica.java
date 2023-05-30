@@ -1,23 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas;
 
+import connection.Conection;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Elder
- */
+
 public class cadastroPessoaFisica extends javax.swing.JFrame {
     confirmaCadastro ConfirmaCadastro;
-    /**
-     * Creates new form cadastroPessoaFisica
-     */
+    Conection con1=new Conection(); 
+    Connection connected;
+    DefaultTableModel modelo;
+    Statement st;
+    ResultSet rs;
+    int idc;
+    
     public cadastroPessoaFisica() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
