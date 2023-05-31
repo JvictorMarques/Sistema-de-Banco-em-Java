@@ -260,27 +260,41 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //verifica se ja existe algum cpf cadastrado com o citado
-        
-        if(jPasswordCadFiConSenha.getText().length()== 0 || jPasswordCadFiSenha.getText().length() == 0 ||
-                jTextCadFiCep.getText().length() == 0|| jTextCadFiCidade.getText().length() == 0||
-                jTextCadFiContato1.getText().length() == 0||jTextCadFiContato2.getText().length() == 0||
-                jTextCadFiCpf.getText().length() == 0||jTextCadFiData.getText().length() == 0||
-                jTextCadFiEmail.getText().length() == 0||jTextCadFiEstado.getText().length() == 0||
-                jTextCadFiNome.getText().length() == 0||jTextCadFiNumero.getText().length() == 0||
-                jTextCadFiRua.getText().length() == 0){
-            JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");
-        }else{
-            if(jPasswordCadFiSenha.getText().equals(jPasswordCadFiConSenha.getText())){
-                if(ConfirmaCadastro == null){
-                        ConfirmaCadastro = new confirmaCadastro();
-                        cadastroPessoaFisica.this.dispose();
-                        ConfirmaCadastro.setVisible(true);
-                        ConfirmaCadastro.recebe(jTextCadFiCpf.getText());
+        String nome = jTextCadFiNome.getText();
+        String data_nascimento = jTextCadFiData.getText(); //nascimento
+        String cpf = jTextCadFiCpf.getText();
+        String cep = jTextCadFiCep.getText();
+        String rua = jTextCadFiRua.getText(); 
+        String numero = jTextCadFiNumero.getText();
+        String cidade = jTextCadFiCidade.getText();
+        String estado = jTextCadFiEstado.getText();  
+        String email = jTextCadFiEmail.getText();
+        String contato1 =jTextCadFiContato1.getText();
+        String contato2 = jTextCadFiContato2.getText();
+        String senha = jPasswordCadFiConSenha.getText();
+        String confirmar_senha = jPasswordCadFiSenha.getText();
+        try {
+             if(nome.equals("") || data_nascimento.equals("") || cpf.equals("") || cep.equals("") || rua.equals("") || numero.equals("") || cidade.equals("") || estado.equals("") || email.equals("") || contato1.equals("") || contato2.equals("") || senha.equals("") || confirmar_senha.equals("")) {
+                JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");
+            } else {
+            if(senha.equals(confirmar_senha)){
+                if(ConfirmaCadastro == null) {
+                    String sql = "insert into cadastro_pessoa_fisica(nome, data_nascimento, cpf, cep, rua, numero, cidade, estado, email, contato1, contato2, senha) values('" + nome + "','" + data_nascimento + "','" + cpf + "','" + cep + "','" + numero + "','" + cidade + "','" + estado + "','" + email + "','" + contato1 + "','" + contato2 + "','" + senha + "')";
+                    connected = con1.getConnection();
+                    st = connected.createStatement();
+                    st.executeUpdate(sql);
+                    ConfirmaCadastro = new confirmaCadastro();
+                    cadastroPessoaFisica.this.dispose();
+                    ConfirmaCadastro.setVisible(true);
+                    ConfirmaCadastro.recebe(jTextCadFiCpf.getText());
                 }
 
             }else{
                 JOptionPane.showMessageDialog(null, "as senhas não correspondem");
             }
+        }
+        } catch (Exception e) {
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
