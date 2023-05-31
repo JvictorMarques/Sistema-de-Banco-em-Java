@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -263,7 +266,7 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
         // TODO add your handling code here:
         //verifica se ja existe algum cpf cadastrado com o citado
         String nome = jTextCadFiNome.getText();
-        String data_nascimento = jTextCadFiData.getText(); //nascimento
+        String data_nascimento =jTextCadFiData.getText(); //nascimento
         String cpf = jTextCadFiCpf.getText();
         String cep = jTextCadFiCep.getText();
         String rua = jTextCadFiRua.getText(); 
