@@ -1,8 +1,10 @@
 package telas;
 
 import connection.Conection;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -293,8 +295,8 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "as senhas não correspondem");
             }
         }
-        } catch (Exception e) {
-            
+        } catch (HeadlessException | SQLException e) {
+            System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro"+e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

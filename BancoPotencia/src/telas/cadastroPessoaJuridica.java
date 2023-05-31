@@ -5,7 +5,14 @@
  */
 package telas;
 
+import connection.Conection;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,11 +20,16 @@ import javax.swing.JOptionPane;
  */
 public class cadastroPessoaJuridica extends javax.swing.JFrame {
     confirmaCadastro ConfirmaCadastro;
-    /**
-     * Creates new form cadastroPessoaJuridica
-     */
+    Conection con1=new Conection(); 
+    Connection connected;
+    DefaultTableModel modelo;
+    Statement st;
+    ResultSet rs;
+    int idc;
+
     public cadastroPessoaJuridica() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -295,30 +307,45 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //VERIFICA SE EXISTE UM CNPJ JA CADASTRADO SE NÃO.
-  
-        if(jPasswordConfirmaSenha.getText().length()== 0|| jPasswordSenha.getText().length()== 0||
-            jTextCadJuAtividadeEconomica.getText().length()== 0 || jTextCadJuCep.getText().length()== 0||
-            jTextCadJuCidade.getText().length()== 0|| jTextCadJuCnpj.getText().length()== 0||
-            jTextCadJuContato1.getText().length()== 0|| jTextCadJuContato2.getText().length()== 0||
-            jTextCadJuControleAcionario.getText().length()== 0||jTextCadJuDataAbertura.getText().length()== 0||
-            jTextCadJuEmail.getText().length()== 0|| jTextCadJuEstado.getText().length()== 0||
-            jTextCadJuGrupoEconomico.getText().length()== 0||jTextCadJuNomeFantasia.getText().length()== 0||
-            jTextCadJuNumero.getText().length()== 0||jTextCadJuRazSocial.getText().length()== 0||
-            jTextCadJuRua.getText().length()== 0){
-            JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");
-        }else{
-            if(jPasswordSenha.getText().equals(jPasswordConfirmaSenha.getText())){
-
-                    if(ConfirmaCadastro == null){
+        String razao_social = jTextCadJuRazSocial.getText();
+        String nome_fantasia = jTextCadJuNomeFantasia.getText();
+        String data_abertura = jTextCadJuDataAbertura.getText();
+        String cnpj = jTextCadJuCnpj.getText();
+        String cep = jTextCadJuCep.getText();
+        String rua = jTextCadJuRua.getText();
+        String numero = jTextCadJuNumero.getText();
+        String cidade = jTextCadJuCidade.getText();
+        String estado = jTextCadJuEstado.getText();
+        String email = jTextCadJuEmail.getText();
+        String contato1 =jTextCadJuContato1.getText();
+        String contato2 = jTextCadJuContato2.getText();
+        String atividade_economica = jTextCadJuAtividadeEconomica.getText();
+        String grupo_economico = jTextCadJuGrupoEconomico.getText();
+        String controle_acionario = jTextCadJuControleAcionario.getText();
+        String senha = jPasswordSenha.getText();
+        String confirmar_senha = jPasswordConfirmaSenha.getText();
+        try {
+            if(razao_social.equals("") || data_abertura.equals("") || cnpj.equals("") || cep.equals("") || rua.equals("") || numero.equals("") || cidade.equals("") || estado.equals("") || email.equals("") || contato1.equals("") || contato2.equals("") || senha.equals("") || confirmar_senha.equals("")  || nome_fantasia.equals("")  || atividade_economica.equals("") || grupo_economico.equals("") || controle_acionario.equals("")) {
+                JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");
+            } else {
+                if(senha.equals(confirmar_senha)){
+                    if(ConfirmaCadastro == null) {
+                        String sql = "insert into cadastro_pessoa_fisica(razao_social, data_abertura, cnpj, cep, rua, numero, cidade, estado, email, contato1, contato2, senha, nome_fantasia, atividade_economica, grupo_economico, controle_acionario) values('" + razao_social + "','" + data_abertura + "','" + cnpj + "','" + cep + "','" + numero + "','" + cidade + "','" + estado + "','" + email + "','" + contato1 + "','" + contato2 + "','" + senha + "','" + nome_fantasia + "','" + atividade_economica + "','" + grupo_economico + "','" + controle_acionario + "')";
+                        connected = con1.getConnection();
+                        st = connected.createStatement();
+                        st.executeUpdate(sql);
                         ConfirmaCadastro = new confirmaCadastro();
                         cadastroPessoaJuridica.this.dispose();
                         ConfirmaCadastro.setVisible(true);
                         ConfirmaCadastro.recebe(jTextCadJuCnpj.getText());
                     }
 
-            }else{
-                JOptionPane.showMessageDialog(null, "as senhas não correspondem");
+                }else{
+                    JOptionPane.showMessageDialog(null, "as senhas não correspondem");
+                }
             }
+        } catch (HeadlessException | SQLException e) {
+            System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro"+e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -411,4 +438,8 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
     private javax.swing.JTextField jTextCadJuRazSocial;
     private javax.swing.JTextField jTextCadJuRua;
     // End of variables declaration//GEN-END:variables
+
+    private void getText() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
