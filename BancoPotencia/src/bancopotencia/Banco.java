@@ -32,7 +32,10 @@ public class Banco {
     public void setLocalidade(String localidade) {
         this.localidade = localidade;
     }
-   
+
+    public void addCliente(Cliente cliente) {
+    this.clientes.add(cliente);
+    }
     public void mostrarInformacoes() {
         System.out.println("ID da agência: " + idAgencia);
         System.out.println("Localidade: " + localidade);
