@@ -56,6 +56,18 @@ public class Cliente {
 	public ArrayList<Conta> getContas(){
 		return contas;
 	}
+
+	public Conta getContas(String getIdConta){
+            int tam =idConta.length();
+            for(int i=0;i>tam;i++){
+                if(idConta.equals(contas.get(i).getIdConta())){
+                    return contas.get(i);
+                }
+            }
+        System.out.println("Erro na existencia de conta");
+        Conta c1 = new Conta();
+        return c1;
+    }
 	
 	public void listarContas() {
 		System.out.printf("-Contas-\n");
