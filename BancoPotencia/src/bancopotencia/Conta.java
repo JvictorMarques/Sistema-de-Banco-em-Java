@@ -20,7 +20,7 @@ public class Conta {
     private String senha;
     private ArrayList<Transacao> transacoes = new ArrayList();
 
-    public Conta(String idConta, double saldo, String tipoPessoa, int operacao, Date dataMovimentacao, String senha, Cliente cliente, Agencia agencia){
+    public Conta(String idConta, double saldo, String tipoPessoa, int operacao, Date dataMovimentacao, String senha, Cliente cliente){
 
         this.idConta = idConta ;
         this.saldo = saldo;
@@ -106,12 +106,22 @@ public class Conta {
     public void mostrarExtrato(){
         //PRINTAR HISTORICO RELADIONADO A CONTA
     }
-     public void adicionarConta(Transacao transacao) {
+     public void adicionarTransacao(Transacao transacao) {
 		this.transacoes.add(transacao);
 	}
     public ArrayList<Transacao> getTransacoes(){
 		return transacoes;
 	}
-     
-
+        public void listarTransacao() {
+                    System.out.printf("-Transacao-\n");
+                    int tamanho = transacoes.size();
+                        for (int i=0; i<tamanho; i++) {
+                            System.out.println("\nTrasacão: "+ i +
+                                  "\nData de transacão: "+ transacoes.get(i).getDataTransacao()+
+                                  "\nValor da Transacão: "+ transacoes.get(i).getValorTransacao()+
+                                  "\nTipo de Cartão(Credito ou Debito): "+ transacoes.get(i).getTipoTransacao()+
+                                  "\nDestino da Tranferencia(Fisica ou Juridica): "+ transacoes.get(i).getDestino()+
+                                  "\nTipo de Transacão(Deposito, Saque, transferir): "+ transacoes.get(i).getTransacao());
+                        }
+        }
 }
