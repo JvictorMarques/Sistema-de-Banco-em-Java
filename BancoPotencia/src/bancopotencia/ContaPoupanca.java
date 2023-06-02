@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class ContaPoupanca extends Conta {
     private double rendimentos;
+    
 
     public ContaPoupanca(String idConta, double saldo, String tipoPessoa, int operacao, Date dataMovimentacao, String senha,
                          Cliente cliente, Agencia agencia) {
@@ -18,20 +19,7 @@ public class ContaPoupanca extends Conta {
         this.rendimentos = rendimentos;
     }
 
-    public void atualizarRendimentos() {
-        Date dataAtual = new Date();
-        //Logica para implementar o rendimento, dataMovimentação e NovoSaldo
-        if (dataAtual.getDate() == getDataMovimentacao().getDate()) {
-            double saldoAtual = getSaldo();
-            double taxaRendimento = 0.05; // TAXA DE RENDIMENTO FICTICIA 
-            double rendimentosAtualizados = saldoAtual * taxaRendimento;
-
-            double novoSaldo = saldoAtual + rendimentosAtualizados;
-            setSaldo(novoSaldo);
-            setRendimentos(rendimentosAtualizados);
-
-            setDataMovimentacao(dataAtual);
-           
-        }
+    public double atualizarRendimentos(double saldo) {
+        return saldo = saldo *0.05;
     }
 }

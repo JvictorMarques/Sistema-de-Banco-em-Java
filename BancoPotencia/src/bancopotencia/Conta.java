@@ -106,5 +106,8 @@ public class Conta {
     public void mostrarExtrato(){
         //PRINTAR HISTORICO RELADIONADO A CONTA
     }
+     public void adicionarConta(Transacao transacao) {
+		this.transacoes.add(transacao);
+	}
 
 }
