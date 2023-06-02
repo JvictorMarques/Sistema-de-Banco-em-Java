@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class Cliente {
 	
+	private String idCliente;
 	private String dataNascimento;
 	private double renda;
 	Endereco endereco;
@@ -25,6 +26,13 @@ public class Cliente {
 		this.endereco = endereco;
 		this.contato = contato;
 	}
+	 public String getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
+    }
 	
 	public String getDataNascimento() {
 		return dataNascimento;
