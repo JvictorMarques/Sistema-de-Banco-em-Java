@@ -37,10 +37,21 @@ public class Banco {
     this.clientes.add(cliente);
 
     }
-
-     public ArrayList<Cliente> getClientes(){
-		return clientes;
-	}
+    
+    public ArrayList<Cliente> getClientes(){
+	return clientes;
+    }
+    public Cliente getCliente(String idCliente){
+            int tam =idCliente.length();
+            for(int i=0;i>tam;i++){
+                if(idCliente.equals(clientes.get(i).getIdCliente())){
+                    return clientes.get(i);
+                }
+            }
+        System.out.println("erro na existencia da cliente");
+        Cliente c1 = new Cliente();
+        return c1;
+    }
     public void mostrarInformacoes() {
         System.out.println("ID da agência: " + idAgencia);
         System.out.println("Localidade: " + localidade);
