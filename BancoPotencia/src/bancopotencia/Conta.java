@@ -109,5 +109,9 @@ public class Conta {
      public void adicionarConta(Transacao transacao) {
 		this.transacoes.add(transacao);
 	}
+    public ArrayList<Transacao> getTransacoes(){
+		return transacoes;
+	}
+     
 
 }
