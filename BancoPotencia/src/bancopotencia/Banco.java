@@ -56,7 +56,7 @@ public class Banco {
 	    	System.out.println("\n Cliente: "+ i +
 	    		  "\nID: "+ clientes.get(i).getIdCliente()+
 	    		  "\nData de Nascimento: "+ clientes.get(i).getDataNascimento()+
-	    		  "\nRenda: "+ cleintes.get(i).getRenda());
+	    		  "\nRenda: "+ clientes.get(i).getRenda());
 	    }
 	}
      public void removerCliente(String numeroClientes) {
