@@ -50,7 +50,7 @@ public class Banco {
     }
 
    public void listarClientes() {
-		System.out.printf("-Cleintes-\n");
+		System.out.printf("-Clientes-\n");
 	    int tamanho = cliente.size();
 	    for (int i=0; i<tamanho; i++) {
 	    	System.out.println("\n Cliente: "+ i +
