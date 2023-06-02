@@ -58,5 +58,16 @@ public class Banco {
 	    		  "\nData de Nascimento: "+ cliente.get(i).getDataNascimento()+
 	    		  "\nRenda: "+ cleinte.get(i).getRenda());
 	    }
-	} 
+	}
+     public void removerConta(String numeroClientes) {
+		int tamanho = clientes.size();
+	    for (int i=0; i<tamanho; i++) {
+	    	String id = clientes.get(i).getIdCliente();
+	    	if(id.equals(numeroClientes)){
+	            clientes.remove(clientes.get(i));
+	            System.out.println("\nCliente removida com sucesso!\n");
+	            break;
+	        }
+	    }
+    }
 }
