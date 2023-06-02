@@ -51,12 +51,12 @@ public class Banco {
 
    public void listarClientes() {
 		System.out.printf("-Clientes-\n");
-	    int tamanho = cliente.size();
+	    int tamanho = clientes.size();
 	    for (int i=0; i<tamanho; i++) {
 	    	System.out.println("\n Cliente: "+ i +
-	    		  "\nID: "+ cliente.get(i).getIdCliente()+
-	    		  "\nData de Nascimento: "+ cliente.get(i).getDataNascimento()+
-	    		  "\nRenda: "+ cleinte.get(i).getRenda());
+	    		  "\nID: "+ clientes.get(i).getIdCliente()+
+	    		  "\nData de Nascimento: "+ clientes.get(i).getDataNascimento()+
+	    		  "\nRenda: "+ cleintes.get(i).getRenda());
 	    }
 	}
      public void removerCliente(String numeroClientes) {
