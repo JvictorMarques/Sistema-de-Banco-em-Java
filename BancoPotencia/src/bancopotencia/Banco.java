@@ -49,4 +49,14 @@ public class Banco {
         System.out.println("Informações de endereço:");
     }
 
+   public void listarClientes() {
+		System.out.printf("-Cleintes-\n");
+	    int tamanho = cliente.size();
+	    for (int i=0; i<tamanho; i++) {
+	    	System.out.println("\n Cliente: "+ i +
+	    		  "\nID: "+ cliente.get(i).getIdCliente()+
+	    		  "\nData de Nascimento: "+ cliente.get(i).getDataNascimento()+
+	    		  "\nRenda: "+ cleinte.get(i).getRenda());
+	    }
+	} 
 }
