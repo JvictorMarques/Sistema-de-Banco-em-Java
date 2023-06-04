@@ -26,6 +26,9 @@ public class Cliente {
 		this.endereco = endereco;
 		this.contato = contato;
 	}
+	public Cliente(){
+
+	}
 	 public String getIdCliente() {
         return idCliente;
     }
