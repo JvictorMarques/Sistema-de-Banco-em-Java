@@ -268,14 +268,14 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
         String nome = jTextCadFiNome.getText();
         String data_nascimento =jTextCadFiData.getText(); //nascimento
         String cpf = jTextCadFiCpf.getText();
-        String cep = jTextCadFiCep.getText();
+        int cep = Integer.parseInt(jTextCadFiCep.getText());
         String rua = jTextCadFiRua.getText(); 
-        String numero = jTextCadFiNumero.getText();
+        int numero = Integer.parseInt(jTextCadFiNumero.getText());
         String cidade = jTextCadFiCidade.getText();
         String estado = jTextCadFiEstado.getText();  
         String email = jTextCadFiEmail.getText();
-        String contato1 =jTextCadFiContato1.getText();
-        String contato2 = jTextCadFiContato2.getText();
+        int contato1 = Integer.parseInt(jTextCadFiContato1.getText());
+        int contato2 = Integer.parseInt(jTextCadFiContato2.getText());
         String senha = jPasswordCadFiConSenha.getText();
         String confirmar_senha = jPasswordCadFiSenha.getText();
         try {
