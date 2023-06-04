@@ -28,6 +28,9 @@ public class Conta {
         this.operacao = operacao;
         this.senha = senha;
    }
+   public Conta(){
+
+   }
 
     public double sacar(double valor){
        double saldoDisponivel = this.saldo;
