@@ -267,7 +267,7 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
         //verifica se ja existe algum cpf cadastrado com o citado
         String nome = jTextCadFiNome.getText();
         String data_nascimento =jTextCadFiData.getText(); //nascimento
-        int cpf = Integer.parseInt(jTextCadFiCpf.getText());
+        String cpf = jTextCadFiCpf.getText();
         int cep = Integer.parseInt(jTextCadFiCep.getText());
         String rua = jTextCadFiRua.getText(); 
         int numero = Integer.parseInt(jTextCadFiNumero.getText());
@@ -279,7 +279,7 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
         String senha = jPasswordCadFiConSenha.getText();
         String confirmar_senha = jPasswordCadFiSenha.getText();
         try {
-             if(nome.equals("") || data_nascimento.equals("") || cpf == 0 || cep == 0 || rua.equals("") || numero == 0 || cidade.equals("") || estado.equals("") || email.equals("") || contato1 == 0 || contato2 == 0 || senha.equals("") || confirmar_senha.equals("")) {
+             if(nome.equals("") || data_nascimento.equals("") || cpf.equals("") || cep == 0 || rua.equals("") || numero == 0 || cidade.equals("") || estado.equals("") || email.equals("") || contato1 == 0 || contato2 == 0 || senha.equals("") || confirmar_senha.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");
             } else {
             if(senha.equals(confirmar_senha)){
