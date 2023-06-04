@@ -325,7 +325,7 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
         String senha = jPasswordSenha.getText();
         String confirmar_senha = jPasswordConfirmaSenha.getText();
         try {
-            if(razao_social.equals("") || data_abertura.equals("") || cnpj.equals("") || cep.equals("") || rua.equals("") || numero.equals("") || cidade.equals("") || estado.equals("") || email.equals("") || contato1.equals("") || contato2.equals("") || senha.equals("") || confirmar_senha.equals("")  || nome_fantasia.equals("")  || atividade_economica.equals("") || grupo_economico.equals("") || controle_acionario.equals("")) {
+            if(razao_social.equals("") || data_abertura.equals("") || cnpj.equals("") || cep == 0 || rua.equals("") || numero == 0 || cidade.equals("") || estado.equals("") || email.equals("") || contato1 == 0 || contato2 == 0 || senha.equals("") || confirmar_senha.equals("")  || nome_fantasia.equals("")  || atividade_economica.equals("") || grupo_economico.equals("") || controle_acionario.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");
             } else {
                 if(senha.equals(confirmar_senha)){
