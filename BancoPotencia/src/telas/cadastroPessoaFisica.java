@@ -278,14 +278,13 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
         int contato2 = Integer.parseInt(jTextCadFiContato2.getText());
         String senha = jPasswordCadFiConSenha.getText();
         String confirmar_senha = jPasswordCadFiSenha.getText();
-        String tipo_conta = "fisica";
         try {
              if(nome.equals("") || data_nascimento.equals("") || cpf.equals("") || cep == 0 || rua.equals("") || numero == 0 || cidade.equals("") || estado.equals("") || email.equals("") || contato1 == 0 || contato2 == 0 || senha.equals("") || confirmar_senha.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");
             } else {
             if(senha.equals(confirmar_senha)){
                 if(ConfirmaCadastro == null) {
-                    String sql = "INSERT INTO cliente (nome, razao_social, cpf, cnpj, data_nascimento, data_abertura, nome_fantasia, atividade_economica, grupo_economico, controle_acionario, email, contato1, contato2, rua, cep, cidade, estado, numero) VALUES ('" + nome + "','" + null + "','" + cpf + "','" + null + "','" + data_nascimento + "','" + null + "','" + null + "','" + null + "','" + null + "','" + null + "','" + email + "','" + contato1 + "','" + contato2 + "','" + rua + "','" + cep + "','" + cidade + "','" + estado + "','" + numero + "','" + tipo_conta + "')";
+                     String sql = "INSERT INTO cadastro_pessoa_fisica(nome, data_nascimento, cpf, cep, rua, numero, cidade, estado, email, contato1, contato2) VALUES('" + nome + "','" + data_nascimento + "','" + cpf + "','" + cep + "','" + rua + "','" + numero + "','" + cidade + "','" + estado + "','" + email + "','" + contato1 + "','" + contato2 + "')";
                     connected = con1.getConnection();
                     st = connected.createStatement();
                     st.executeUpdate(sql);
