@@ -5,7 +5,16 @@
  */
 package telas;
 import bancopotencia.BancoPotencia;
+import connection.Conection;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,11 +22,16 @@ import javax.swing.JOptionPane;
  */
 public class telaLogin extends javax.swing.JFrame {
     menuPrincipal menu;
-    /**
-     * Creates new form telaLogin
-     */
+    confirmaCadastro ConfirmaCadastro;
+    Conection con1=new Conection(); 
+    Connection connected;
+    DefaultTableModel modelo;
+    Statement st;
+    ResultSet rs;
+    int idc;
     public telaLogin() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -137,17 +151,30 @@ public class telaLogin extends javax.swing.JFrame {
 
     private void loginEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginEntrarActionPerformed
         // TODO add your handling code here:
-        if(txtLogin.getText().equals("usuario") && txtSenha.getText().equals("123456")){
-            if(menu == null){
-                menuPrincipal menu = new menuPrincipal();
-                menu.setVisible(true);
-                double valor = 500;
-                String resultado = String.format("%.2f", valor);
-                menu.recebeMenu(resultado);
-                this.dispose();
+        int id_conta = Integer.parseInt(txtLogin.getText());
+        String senha_login = txtSenha.getText();
+        try {
+            connected = con1.getConnection();       
+            String sqlSelect = "SELECT id_conta, senha, saldo FROM conta WHERE id_conta = " + id_conta;
+            st = connected.createStatement();
+            rs = st.executeQuery(sqlSelect);
+            if (rs.next()) {
+                int id_conta_bd = rs.getInt("id_conta");
+                String senha_bd = rs.getString("senha");
+                double saldo = rs.getDouble("saldo");
+                if (id_conta == id_conta_bd && senha_login.equals(senha_bd)) {
+                    menuPrincipal menu = new menuPrincipal();
+                    menu.setVisible(true);
+                    menu.recebeMenu(String.valueOf(saldo));
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sai dai doido");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario nao cadastrado");
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Sai dai doido");
+        } catch (HeadlessException | SQLException e) {
+            System.err.println("Erro ao estabelecer a conexão com o banco de dados. Erro: " + e);
         }
     }//GEN-LAST:event_loginEntrarActionPerformed
 

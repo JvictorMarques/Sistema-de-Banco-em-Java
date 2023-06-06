@@ -324,20 +324,40 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
         String controle_acionario = jTextCadJuControleAcionario.getText();
         String senha = jPasswordSenha.getText();
         String confirmar_senha = jPasswordConfirmaSenha.getText();
+        String tipo_conta = "juridica";
+        double saldo = 0;
         try {
             if(razao_social.equals("") || data_abertura.equals("") || cnpj.equals("") || cep == 0 || rua.equals("") || numero == 0 || cidade.equals("") || estado.equals("") || email.equals("") || contato1 == 0 || contato2 == 0 || senha.equals("") || confirmar_senha.equals("")  || nome_fantasia.equals("")  || atividade_economica.equals("") || grupo_economico.equals("") || controle_acionario.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");
             } else {
                 if(senha.equals(confirmar_senha)){
                     if(ConfirmaCadastro == null) {
-                        String sql = "insert into cadastro_pessoa_juridica(razao_social, data_abertura, cnpj, cep, rua, numero, cidade, estado, email, contato1, contato2, nome_fantasia, atividade_economica, grupo_economico, controle_acionario) values('" + razao_social + "','" + data_abertura + "','" + cnpj + "','" + cep + "','" + rua + "','" + numero + "','" + cidade + "','" + estado + "','" + email + "','" + contato1 + "','" + contato2 + "','" + nome_fantasia + "','" + atividade_economica + "','" + grupo_economico + "','" + controle_acionario + "')";
+                        String sql = "INSERT INTO cadastro_pessoa_juridica(razao_social, data_abertura, cnpj, cep, rua, numero, cidade, estado, email, contato1, contato2, nome_fantasia, atividade_economica, grupo_economico, controle_acionario) VALUES ('" + razao_social + "','" + data_abertura + "','" + cnpj + "','" + cep + "','" + rua + "','" + numero + "','" + cidade + "','" + estado + "','" + email + "','" + contato1 + "','" + contato2 + "','" + nome_fantasia + "','" + atividade_economica + "','" + grupo_economico + "','" + controle_acionario + "')";
                         connected = con1.getConnection();
                         st = connected.createStatement();
                         st.executeUpdate(sql);
+                        String sqlSelect = "SELECT LAST_INSERT_ID() AS id";
+                        st = connected.createStatement();
+                        rs = st.executeQuery(sqlSelect);
+                        int id_cadastro = 0;
+                        if (rs.next()) {
+                            id_cadastro = rs.getInt("id");
+                        }
+                        if (id_cadastro != 0) {
+                            String sqlInsertConta = "INSERT INTO conta(id_cliente, tipo_conta, saldo, senha) VALUES ('" + id_cadastro + "','" + tipo_conta + "','" + saldo + "','" + senha + "')";
+                            st.executeUpdate(sqlInsertConta);
+                        }
+                        String sqlSelectConta = "SELECT LAST_INSERT_ID() AS id_conta";
+                        st = connected.createStatement();
+                        rs = st.executeQuery(sqlSelectConta);
+                        int id_conta = 0;
+                        if (rs.next()) {
+                            id_conta = rs.getInt("id_conta");
+                        }
                         ConfirmaCadastro = new confirmaCadastro();
                         cadastroPessoaJuridica.this.dispose();
                         ConfirmaCadastro.setVisible(true);
-                        ConfirmaCadastro.recebe(cnpj);
+                        ConfirmaCadastro.recebe(String.valueOf(id_conta));
                     }
 
                 }else{
