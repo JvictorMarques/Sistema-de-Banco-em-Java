@@ -5,14 +5,29 @@
  */
 package telas;
 
+import connection.Conection;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import bancopotencia.Sessao;
+import bancopotencia.Conta;
 
 /**
  *
  * @author Elder
  */
 public class transferenciaTela extends javax.swing.JFrame {
-
+    Conection con1=new Conection(); 
+    Connection connected;
+    Statement st;
+    ResultSet rs;
+    Sessao sessao;
+    Conta conta;
     /**
      * Creates new form transferenciaTela
      */
@@ -56,6 +71,12 @@ public class transferenciaTela extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Valor a ser transferido:");
+
+        jTextFieldValorTransferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldValorTransferenciaActionPerformed(evt);
+            }
+        });
 
         jButtonVoltar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonVoltar.setText("VOLTAR");
@@ -148,10 +169,39 @@ public class transferenciaTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonTransferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransferirActionPerformed
-        // TODO add your handling code here:
-        //metodos para realizar a transferencia valor transferencia : jTextFieldValorTransferencia numero da conta: jTextNumeroDaConta
-        JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso");
+     try {
+            Conta conta = Sessao.getInstance().getUsuario();
+            int id_conta = Integer.parseInt(jTextNumeroDaConta.getText());
+            if(id_conta !=conta.getIdConta()){
+                connected = con1.getConnection();       
+                String sqlSelect = "SELECT id_conta_corrente, saldo FROM banco_potencia.contacorrente WHERE id_conta_corrente = " + id_conta;
+                st = connected.createStatement();
+                rs = st.executeQuery(sqlSelect);
+                double digita = Double.parseDouble(jTextFieldValorTransferencia.getText());
+                if (rs.next() && conta.getSaldo() > digita) {
+                    double saldoBanco = rs.getDouble("saldo");
+                    double saldoDestino = saldoBanco + digita;
+                    double novoSaldo = conta.getSaldo() - digita;
+                    conta.setSaldo(novoSaldo);
+                    String sql = "UPDATE banco_potencia.contacorrente SET saldo = '"+saldoDestino+"' WHERE (id_conta_corrente = '"+id_conta+"')";
+                    st.executeUpdate(sql);
+
+                    JOptionPane.showMessageDialog(null,"transferencia com sucesso");
+                    
+                }else{
+                   JOptionPane.showMessageDialog(null, "A conta informada nao existe");
+                }
+            }else{
+                
+            }
+        } catch (HeadlessException | SQLException e) {
+            System.err.println("Erro ao estabelecer a conexão com o banco de dados. Erro: " + e);
+        }
     }//GEN-LAST:event_jButtonTransferirActionPerformed
+
+    private void jTextFieldValorTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorTransferenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldValorTransferenciaActionPerformed
 
     /**
      * @param args the command line arguments

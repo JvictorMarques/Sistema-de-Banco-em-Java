@@ -35,8 +35,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     DefaultTableModel modelo;
     Statement st;
     ResultSet rs;
-
-
+    
     Conta conta;
 
 
