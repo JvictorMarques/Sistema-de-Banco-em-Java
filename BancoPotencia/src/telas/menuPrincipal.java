@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 package telas;
+import bancopotencia.Conta;
 import connection.Conection;
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -30,6 +31,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     DefaultTableModel modelo;
     Statement st;
     ResultSet rs;
+    Conta conta;
 
     
     /**
@@ -197,6 +199,7 @@ public class menuPrincipal extends javax.swing.JFrame {
             rs = st.executeQuery(sqlSelect1);
             if (rs.next()) {
                 double saldo = rs.getDouble("saldo");
+                conta.setSaldo(saldo);
                 jLabelValorSaldo.setText(Double.toString(saldo));
             } else {
                 JOptionPane.showMessageDialog(null, "Aqui não nemnem");
