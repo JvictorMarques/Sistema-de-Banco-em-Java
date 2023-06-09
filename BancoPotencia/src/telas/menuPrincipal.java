@@ -38,28 +38,10 @@ public class menuPrincipal extends javax.swing.JFrame {
     public menuPrincipal() {
 
         initComponents();
-        setLocationRelativeTo(null);
-        
+        setLocationRelativeTo(null);  
         
     }
-    public void construtor(int id){
-        int chama = id;
-        try {
-            connected = con1.getConnection();       
-            String sqlSelect1 = "SELECT id_conta_corrente, senha, saldo FROM banco_potencia.contacorrente WHERE id_conta_corrente = " + chama;
-            st = connected.createStatement();
-            rs = st.executeQuery(sqlSelect1);
-            if (rs.next()) {
-                double saldo = rs.getDouble("saldo");
-                jLabelValorSaldo.setText(Double.toString(saldo));
-            } else {
-                JOptionPane.showMessageDialog(null, "Aqui não nemnem");
-                this.dispose();
-            }
-        } catch (HeadlessException | SQLException e) {
-            System.err.println("Erro ao estabelecer a conexão com o banco de dados. Erro: " + e);
-        }
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -206,7 +188,24 @@ public class menuPrincipal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    public void saldo(int id){
+        int chama = id;
+        try {
+            connected = con1.getConnection();       
+            String sqlSelect1 = "SELECT id_conta_corrente, senha, saldo FROM banco_potencia.contacorrente WHERE id_conta_corrente = " + chama;
+            st = connected.createStatement();
+            rs = st.executeQuery(sqlSelect1);
+            if (rs.next()) {
+                double saldo = rs.getDouble("saldo");
+                jLabelValorSaldo.setText(Double.toString(saldo));
+            } else {
+                JOptionPane.showMessageDialog(null, "Aqui não nemnem");
+                this.dispose();
+            }
+        } catch (HeadlessException | SQLException e) {
+            System.err.println("Erro ao estabelecer a conexão com o banco de dados. Erro: " + e);
+        }
+    }
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -297,17 +296,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         });
         
     }
-
     
-    /*public void passaId(int id_conta){
-        setId(id_conta);
-    }*/
-    
-
-    public void recebeMenu(String saldo){
-        jLabelValorSaldo.setText(saldo);
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDeposito;
     private javax.swing.JButton jButtonExtrato;

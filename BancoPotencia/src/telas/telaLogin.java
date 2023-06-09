@@ -157,19 +157,15 @@ public class telaLogin extends javax.swing.JFrame {
 
             connected = con1.getConnection();       
             String sqlSelect = "SELECT id_conta_corrente, senha, saldo FROM banco_potencia.contacorrente WHERE id_conta_corrente = " + id_conta;
-
-            
-
             st = connected.createStatement();
             rs = st.executeQuery(sqlSelect);
             if (rs.next()) {
                 int id_conta_bd = rs.getInt("id_conta_corrente");
                 String senha_bd = rs.getString("senha");
-                double saldo = rs.getDouble("saldo");
                 if (id_conta == id_conta_bd && senha_login.equals(senha_bd)) {
                     menuPrincipal menu = new menuPrincipal();
                     menu.setVisible(true);
-                    menu.construtor(id_conta_bd);
+                    menu.saldo(id_conta_bd);
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Sai dai doido");
