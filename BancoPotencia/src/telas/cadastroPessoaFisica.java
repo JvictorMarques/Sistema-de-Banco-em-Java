@@ -268,45 +268,60 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
         String nome = jTextCadFiNome.getText();
         String data_nascimento =jTextCadFiData.getText(); //nascimento
         String cpf = jTextCadFiCpf.getText();
-        int cep = Integer.parseInt(jTextCadFiCep.getText());
+        String cep = jTextCadFiCep.getText();
         String rua = jTextCadFiRua.getText(); 
-        int numero = Integer.parseInt(jTextCadFiNumero.getText());
+        String numero = jTextCadFiNumero.getText();
         String cidade = jTextCadFiCidade.getText();
         String estado = jTextCadFiEstado.getText();  
         String email = jTextCadFiEmail.getText();
-        int contato1 = Integer.parseInt(jTextCadFiContato1.getText());
-        int contato2 = Integer.parseInt(jTextCadFiContato2.getText());
+        String contato1 = jTextCadFiContato1.getText();
+        String contato2 = jTextCadFiContato2.getText();
         String senha = jPasswordCadFiConSenha.getText();
         String confirmar_senha = jPasswordCadFiSenha.getText();
         String tipo_conta = "fisica";
         double saldo = 0;
         try {
-             if(nome.equals("") || data_nascimento.equals("") || cpf.equals("") || cep == 0 || rua.equals("") || numero == 0 || cidade.equals("") || estado.equals("") || email.equals("") || contato1 == 0 || contato2 == 0 || senha.equals("") || confirmar_senha.equals("")) {
+             if(nome.equals("") || data_nascimento.equals("") || cpf.equals("") || cep.equals("") || rua.equals("") || numero.equals("") || cidade.equals("") || estado.equals("") || email.equals("") || contato1.equals("") || contato2.equals("") || senha.equals("") || confirmar_senha.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");
             } else {
             if(senha.equals(confirmar_senha)){
                 if(ConfirmaCadastro == null) {
-                    String sql = "INSERT INTO cadastro_pessoa_fisica(nome, data_nascimento, cpf, cep, rua, numero, cidade, estado, email, contato1, contato2) VALUES('" + nome + "','" + data_nascimento + "','" + cpf + "','" + cep + "','" + rua + "','" + numero + "','" + cidade + "','" + estado + "','" + email + "','" + contato1 + "','" + contato2 + "')";
+                    String sql = "INSERT INTO cliente(id_banco, cpf) VALUES('" + 1 + "','"+cpf+"')";
                     connected = con1.getConnection();
                     st = connected.createStatement();
                     st.executeUpdate(sql);
-                    String sqlSelect = "SELECT LAST_INSERT_ID() AS id";
+                    String sqlSelect = "SELECT id_cliente from banco_potencia.cliente where cpf like('"+"%"+ cpf +"%"+"')";
                     st = connected.createStatement();
                     rs = st.executeQuery(sqlSelect);
-                    int id_cadastro = 0;
+                    int id_cliente = 0;
                     if (rs.next()) {
-                        id_cadastro = rs.getInt("id");
+                        id_cliente = rs.getInt("id_cliente");
                     }
-                    if (id_cadastro != 0) {
-                        String sqlInsertConta = "INSERT INTO conta(id_cliente, tipo_conta, saldo, senha) VALUES ('" + id_cadastro + "','" + tipo_conta + "','" + saldo + "','" + senha + "')";
-                        st.executeUpdate(sqlInsertConta);
+                    if (id_cliente != 0) {
+                        String sqlConta = "INSERT INTO contacorrente(id_cliente, saldo, taxa, saldo_limite, senha) VALUES ('" + id_cliente + "', '" + 0 + "', '" + 0 + "', '" + 0 + "', '" + senha + "')";
+                        st.executeUpdate(sqlConta);
                     }
-                    String sqlSelectConta = "SELECT LAST_INSERT_ID() AS id_conta";
+                    
+                    String sqlSelectConta = "SELECT id_conta_corrente FROM banco_potencia.contacorrente where id_cliente = ('" + id_cliente + "') ORDER BY id_conta_corrente desc limit 1";
                     st = connected.createStatement();
                     rs = st.executeQuery(sqlSelectConta);
                     int id_conta = 0;
                     if (rs.next()) {
-                        id_conta = rs.getInt("id_conta");
+                        id_conta = rs.getInt("id_conta_corrente");
+                    }
+                    if (id_conta != 0) {
+                        String sqlPoupanca = "INSERT INTO contapoupanca(id_conta_corrente, rendimentos) VALUES ('" + id_conta + "', '" + 0 + "')";
+                        st.executeUpdate(sqlPoupanca);
+                        
+                        String sqlContato = "INSERT INTO contato(id_conta_corrente, email, contato1, contato2) VALUES ('" + id_conta + "', '" + email + "', '" + contato1 + "', '" + contato2 + "')";
+                        st.executeUpdate(sqlContato);
+                        
+                        String sqlEndereco = "INSERT INTO endereco(id_conta_corrente, logradouro, numero, cep, cidade, estado) VALUES ('" + id_conta + "', '" + rua + "', '" + numero + "', '" + cep + "', '" + cidade + "', '" + estado + "')";
+                        st.executeUpdate(sqlEndereco);
+                        
+                        String sqlPessoaFisica = "INSERT INTO pessoafisica(id_conta_corrente, cpf, nome, sobrenome, data_nascimento, renda) VALUES ('" + id_conta + "', '" + cpf + "', '" + nome + "', '" + nome + "', '" + data_nascimento + "', '" + 0 + "')";
+                        st.executeUpdate(sqlPessoaFisica);
+                        
                     }
                     ConfirmaCadastro = new confirmaCadastro();
                     cadastroPessoaFisica.this.dispose();
