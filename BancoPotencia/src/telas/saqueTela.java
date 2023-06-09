@@ -138,8 +138,6 @@ public class saqueTela extends javax.swing.JFrame {
 
         // TODO add your handling code here:
         //metodos da classe sacar
-        
-        JOptionPane.showMessageDialog(null, "Saque realizado com sucesso.");
 
         try {       
             double valor = Double.parseDouble(jLabelValorSaldo.getText());

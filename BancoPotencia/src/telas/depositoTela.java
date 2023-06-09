@@ -6,6 +6,7 @@
 package telas;
 
 import bancopotencia.Conta;
+import bancopotencia.Sessao;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ public class depositoTela extends javax.swing.JFrame {
      */
     public depositoTela() {
         initComponents();
+        
     }
     
     /**
@@ -117,15 +119,17 @@ public class depositoTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepositarActionPerformed
-        try {       
+        try {  
+            
+            Conta conta = Sessao.getInstance().getUsuario();
             double valorDeposito = Double.parseDouble(jTextFieldValorDeposito.getText());
             // Verifica se o valor do depósito é válido (maior que zero)
             if (valorDeposito > 0) {
                 // Realiza o depósito na conta
                 double novoSaldo = valorDeposito + conta.getSaldo();
                 conta.setSaldo(novoSaldo);
-
-                JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso");
+                String nome = Double.toString(conta.getSaldo());
+                JOptionPane.showMessageDialog(null, nome);
             } else {
                 // O valor do depósito é inválido
                 JOptionPane.showMessageDialog(null, "Valor de depósito inválido");
@@ -168,6 +172,11 @@ public class depositoTela extends javax.swing.JFrame {
                 new depositoTela().setVisible(true);
             }
         });
+        
+        
+    }
+    public void contaChama(Conta conta){
+        Conta c1 = conta; 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

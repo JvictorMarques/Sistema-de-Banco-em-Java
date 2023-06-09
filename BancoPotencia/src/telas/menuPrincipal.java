@@ -5,6 +5,8 @@
  * and open the template in the editor.
  */
 package telas;
+import bancopotencia.Conta;
+import bancopotencia.Sessao;
 import connection.Conection;
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -30,6 +32,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     DefaultTableModel modelo;
     Statement st;
     ResultSet rs;
+    
 
     
     /**
@@ -190,14 +193,19 @@ public class menuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     public void saldo(int id){
         int chama = id;
+        
         try {
             connected = con1.getConnection();       
-            String sqlSelect1 = "SELECT id_conta_corrente, senha, saldo FROM banco_potencia.contacorrente WHERE id_conta_corrente = " + chama;
+            String sqlSelect1 = "SELECT id_conta_corrente, saldo FROM banco_potencia.contacorrente WHERE id_conta_corrente = " + chama;
             st = connected.createStatement();
             rs = st.executeQuery(sqlSelect1);
             if (rs.next()) {
                 double saldo = rs.getDouble("saldo");
-                jLabelValorSaldo.setText(Double.toString(saldo));
+                int id_conta = rs.getInt("id_conta_corrente");
+                Conta conta = new Conta(id_conta, saldo);
+                jLabelValorSaldo.setText(Double.toString(conta.getSaldo()));
+                Sessao sessao = Sessao.getInstance();
+                sessao.setUsuario(conta);
             } else {
                 JOptionPane.showMessageDialog(null, "Aqui não nemnem");
                 this.dispose();
@@ -205,6 +213,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         } catch (HeadlessException | SQLException e) {
             System.err.println("Erro ao estabelecer a conexão com o banco de dados. Erro: " + e);
         }
+    
     }
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         // TODO add your handling code here:
@@ -240,6 +249,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         if(deposito == null){
             depositoTela deposito = new depositoTela();
             deposito.setVisible(true);
+            
         }
     }//GEN-LAST:event_jButtonDepositoActionPerformed
 

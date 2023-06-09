@@ -13,20 +13,19 @@ import java.util.ArrayList;
  * @author Elder
  */
 public class Conta {
-    private String idConta;
+    private int idConta;
     private String tipoPessoa;
     private double saldo;
     private int operacao;
     private String senha;
     private ArrayList<Transacao> transacoes = new ArrayList();
 
-    public Conta(String idConta, double saldo, String tipoPessoa, int operacao, Date dataMovimentacao, String senha, Cliente cliente){
+    public Conta(int idConta, double saldo){
 
         this.idConta = idConta ;
         this.saldo = saldo;
-        this.tipoPessoa = tipoPessoa;
-        this.operacao = operacao;
-        this.senha = senha;
+        
+        
    }
    public Conta(){
 
@@ -45,11 +44,11 @@ public class Conta {
        }
     }
     
-    public String getIdConta() {
+    public int getIdConta() {
         return idConta;
     }
 
-    public void setIdConta(String idConta) {
+    public void setIdConta(int idConta) {
         this.idConta = idConta;
     }
 
