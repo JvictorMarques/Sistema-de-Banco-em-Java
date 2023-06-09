@@ -9,7 +9,7 @@ public class ContaCorrente extends Conta{
     Conta saldo;
     
     public ContaCorrente(double taxa, double SaldoLimite, String idConta, double saldo, String tipoPessoa, int operacao, Date dataMovimentacao, String senha, Cliente cliente){
-        super(idConta, saldo, tipoPessoa, operacao, dataMovimentacao, senha, cliente);
+        //super(idConta, saldo, tipoPessoa, operacao, dataMovimentacao, senha, cliente);
         this.taxa = taxa;
         this.SaldoLimite = SaldoLimite;
     }

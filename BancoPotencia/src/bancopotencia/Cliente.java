@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package bancopotencia;
 
 /**
@@ -84,7 +80,7 @@ public class Cliente {
         }
     }
 
-    public void removerConta(String numeroConta) {
+    /*/public void removerConta(String numeroConta) {
         int tamanho = contas.size();
         for (int i=0; i<tamanho; i++) {
             String id = contas.get(i).getIdConta();
@@ -94,5 +90,5 @@ public class Cliente {
                 break;
             }
         }
-    }
+    }/*/
 }
