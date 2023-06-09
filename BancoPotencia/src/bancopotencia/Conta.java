@@ -7,6 +7,7 @@ package bancopotencia;
 
 import java.util.Date;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,7 +23,7 @@ public class Conta {
 
     public Conta(int idConta, double saldo){
 
-        this.idConta = idConta ;
+        this.idConta = idConta ;    
         this.saldo = saldo;
         
         
@@ -31,17 +32,19 @@ public class Conta {
 
    }
 
-    public double sacar(double valor){
-       double saldoDisponivel = this.saldo;
-       if(saldoDisponivel > valor){
-           setSaldo(saldoDisponivel-valor);
-           //INSERTS NO BANCO
-
-           return this.saldo;
-       }else{
-           //RETORNA NA TELA QUE O CLIENTE N TEM SALDO PARA ESTA OPERACAO
-           return 0;
-       }
+    public void sacar(double valor){
+       JOptionPane.showMessageDialog(null, "Saque realizado com sucesso.");
+        try {       
+            if (valor > 0) {
+                double novoSaldo = valor - getSaldo();
+                setSaldo(novoSaldo);
+                JOptionPane.showMessageDialog(null, "saque realizado com sucesso");
+            } else {
+                JOptionPane.showMessageDialog(null, "Nao tem saldo para sacar");
+            }
+        }catch (NumberFormatException ex){
+         System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");     
+        }
     }
     
     public int getIdConta() {
@@ -95,14 +98,22 @@ public class Conta {
         }
     }
 
-    public double depositar(double valor){
-       if (valor>0){
-           double novoSaldo = this.saldo + valor;
-           setSaldo(novoSaldo);
-           return novoSaldo;
-       }else {
-           return 0;
-       }
+    public void depositar(double valor){
+       try {       
+            // Verifica se o valor do depósito é válido (maior que zero)
+            if (valor > 0) {
+                // Realiza o depósito na conta
+                double novoSaldo = valor + getSaldo();
+                setSaldo(novoSaldo);
+
+                JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso");
+            } else {
+                // O valor do depósito é inválido
+                JOptionPane.showMessageDialog(null, "Valor de depósito inválido");
+            }
+        } catch (NumberFormatException ex) {
+             System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");
+        }
     }
 
     public void mostrarExtrato(){

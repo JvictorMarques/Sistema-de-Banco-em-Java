@@ -38,25 +38,23 @@ public class ContaCorrente extends Conta{
         this.SaldoLimite = Saldo + limite;
     }
     @Override
-    public double sacar(double valor){
+    public void sacar(double valor){
         double saldo = super.getSaldo();
         if(valor <= saldo){
         }else{
             saldo -= valor + taxa;
-            return saldo;
+            super.setSaldo(saldo);
 
         }
-        return 0;
     }
     @Override
-    public double depositar(double valor){
+    public void depositar(double valor){
         double saldo = super.getSaldo();
         if (valor>0){
         }else{
             saldo += (valor - taxa);
-            return saldo;
+            super.setSaldo(saldo);
         }
-        return 0;
     }
 }
 
