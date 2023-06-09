@@ -179,7 +179,8 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     private void jButtonSaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaqueActionPerformed
         // TODO add your handling code here:
-        if(saque == null){
+        if(saque == null) {
+            
             saqueTela saque = new saqueTela();
             saque.setVisible(true);   
             saque.recebeSaque(jLabelValorSaldo.getText());
@@ -258,8 +259,8 @@ public class menuPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    public void recebeMenu(String recebe){
-        jLabelValorSaldo.setText(recebe);
+    public void recebeMenu(String saldo){
+        jLabelValorSaldo.setText(saldo);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDeposito;

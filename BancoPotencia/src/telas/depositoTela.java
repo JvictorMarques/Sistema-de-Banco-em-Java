@@ -117,24 +117,22 @@ public class depositoTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepositarActionPerformed
-          try {
-         double valorDeposito = 0.0;
-        valorDeposito = Double.parseDouble(jTextFieldValorDeposito.getText());
+        try {       
+            double valorDeposito = Double.parseDouble(jTextFieldValorDeposito.getText());
+            // Verifica se o valor do depósito é válido (maior que zero)
+            if (valorDeposito > 0) {
+                // Realiza o depósito na conta
+                double novoSaldo = valorDeposito + conta.getSaldo();
+                conta.setSaldo(novoSaldo);
 
-        // Verifica se o valor do depósito é válido (maior que zero)
-        if (valorDeposito > 0) {
-            // Realiza o depósito na conta
-            double novoSaldo = valorDeposito + conta.getSaldo();
-            conta.setSaldo(novoSaldo);
-
-            JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso");
-        } else {
-            // O valor do depósito é inválido
-            JOptionPane.showMessageDialog(null, "Valor de depósito inválido");
+                JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso");
+            } else {
+                // O valor do depósito é inválido
+                JOptionPane.showMessageDialog(null, "Valor de depósito inválido");
+            }
+        } catch (NumberFormatException ex) {
+             System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");
         }
-    }catch (NumberFormatException ex){
-         System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");
-    }
     }//GEN-LAST:event_jButtonDepositarActionPerformed
 
     /**

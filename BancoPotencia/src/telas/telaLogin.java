@@ -186,7 +186,6 @@ public class telaLogin extends javax.swing.JFrame {
      
         Cadastro cadastro = new Cadastro();
         cadastro.setVisible(true);
-        
         telaLogin.this.dispose();
         
     }//GEN-LAST:event_loginCadastrarActionPerformed

@@ -135,20 +135,18 @@ public class saqueTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSacarActionPerformed
-        try {
-        double valor = 0.0;         
-        valor = Double.parseDouble(jLabelValorSaldo.getText());
-        if (valor > 0) {
-            double novoSaldo = valor - conta.getSaldo();
-            conta.setSaldo(novoSaldo);
-            JOptionPane.showMessageDialog(null, "saque realizado com sucesso");
-        } else {
-            JOptionPane.showMessageDialog(null, "Nao tem saldo para sacar");
+        try {       
+            double valor = Double.parseDouble(jLabelValorSaldo.getText());
+            if (valor > 0) {
+                double novoSaldo = valor - conta.getSaldo();
+                conta.setSaldo(novoSaldo);
+                JOptionPane.showMessageDialog(null, "saque realizado com sucesso");
+            } else {
+                JOptionPane.showMessageDialog(null, "Nao tem saldo para sacar");
+            }
+        }catch (NumberFormatException ex){
+         System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");     
         }
-    }catch (NumberFormatException ex){
-     System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");
-        
-    }
     }//GEN-LAST:event_jButtonSacarActionPerformed
 
     /**
