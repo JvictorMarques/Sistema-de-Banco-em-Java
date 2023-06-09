@@ -7,6 +7,7 @@ package telas;
 
 import javax.swing.JOptionPane;
 import bancopotencia.Conta;
+import bancopotencia.Sessao;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.lang.Double;
@@ -75,6 +76,12 @@ public class saqueTela extends javax.swing.JFrame {
             }
         });
 
+        jTextValorSaque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextValorSaqueActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,28 +143,30 @@ public class saqueTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSacarActionPerformed
-
-
         // TODO add your handling code here:
-        //metodos da classe sacar
+    // métodos da classe sacar
 
+    try {
+        Conta conta = Sessao.getInstance().getUsuario();
+        double valorSaque = Double.parseDouble(jTextFieldValorSaque.getText());
+        double saldoConta = conta.getSaldo();
 
-        JOptionPane.showMessageDialog(null, "Saque realizado com sucesso.");
-
-        try {       
-            double valor = Double.parseDouble(jLabelValorSaldo.getText());
-            if (valor > 0) {
-                double novoSaldo = valor - conta.getSaldo();
-                conta.setSaldo(novoSaldo);
-                JOptionPane.showMessageDialog(null, "saque realizado com sucesso");
-            } else {
-                JOptionPane.showMessageDialog(null, "Nao tem saldo para sacar");
-            }
-        }catch (NumberFormatException ex){
-         System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");     
+        if (valorSaque > 0 && valorSaque <= saldoConta) {
+            double novoSaldo = saldoConta - valorSaque;
+            conta.setSaldo(novoSaldo);
+            JOptionPane.showMessageDialog(null, "Saque realizado com sucesso. Novo saldo: " + novoSaldo);
+        } else {
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
         }
+    } catch (NumberFormatException ex) {
+       System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");
+    }
 
     }//GEN-LAST:event_jButtonSacarActionPerformed
+
+    private void jTextValorSaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextValorSaqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextValorSaqueActionPerformed
 
     /**
      * @param args the command line arguments
