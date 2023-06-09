@@ -146,7 +146,7 @@ public class saqueTela extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Nao tem saldo para sacar");
         }
     }catch (NumberFormatException ex){
-        JOptionPane.showMessageDialog(null,"erro na convertencia");
+     System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");
         
     }
     }//GEN-LAST:event_jButtonSacarActionPerformed
