@@ -5,6 +5,9 @@
  */
 package telas;
 
+import bancopotencia.Conta;
+import java.awt.HeadlessException;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -113,9 +116,33 @@ public class depositoTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepositarActionPerformed
-        // TODO add your handling code here:
-        //metodos para fazer deposio na conta existente valor a ser depositado : jTextFieldValorDeposito
-        JOptionPane.showMessageDialog(null, "Deposito realizado com sucesso");
+          try {
+        // Recupera o valor do depósito digitado pelo usuário
+        double valorDeposito = Double.parseDouble(jTextFieldValorDeposito.getText());
+
+        // Verifica se o valor do depósito é válido (maior que zero)
+        if (valorDeposito > 0) {
+            // Realiza o depósito na conta
+            double novoSaldo = valorDeposito + Conta.getSaldo();
+            Conta.setSaldo(novoSaldo);
+
+            // Atualiza o saldo no banco de dados
+           
+            // Exibe uma mensagem de sucesso
+            JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso");
+
+            // Limpa o campo de texto
+            jTextFieldValorDeposito.setText("");
+        } else {
+            // O valor do depósito é inválido
+            JOptionPane.showMessageDialog(null, "Valor de depósito inválido");
+        }
+    } catch (HeadlessException | SQLException e) {
+        // Erro ao acessar o banco de dados
+        JOptionPane.showMessageDialog(null, "Erro ao acessar o banco de dados");
+    }
+}
+
     }//GEN-LAST:event_jButtonDepositarActionPerformed
 
     /**
