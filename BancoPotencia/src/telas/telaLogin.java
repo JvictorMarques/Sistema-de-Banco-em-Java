@@ -154,8 +154,12 @@ public class telaLogin extends javax.swing.JFrame {
         int id_conta = Integer.parseInt(txtLogin.getText());
         String senha_login = txtSenha.getText();
         try {
+
             connected = con1.getConnection();       
             String sqlSelect = "SELECT id_conta_corrente, senha, saldo FROM banco_potencia.contacorrente WHERE id_conta_corrente = " + id_conta;
+
+            
+
             st = connected.createStatement();
             rs = st.executeQuery(sqlSelect);
             if (rs.next()) {
@@ -186,7 +190,6 @@ public class telaLogin extends javax.swing.JFrame {
      
         Cadastro cadastro = new Cadastro();
         cadastro.setVisible(true);
-        
         telaLogin.this.dispose();
         
     }//GEN-LAST:event_loginCadastrarActionPerformed

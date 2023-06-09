@@ -6,12 +6,17 @@
 package telas;
 
 import javax.swing.JOptionPane;
+import bancopotencia.Conta;
+import java.awt.HeadlessException;
+import java.sql.SQLException;
+import java.lang.Double;
 
 /**
  *
  * @author Elder
  */
 public class saqueTela extends javax.swing.JFrame {
+    Conta conta;
 
     /**
      * Creates new form saqueTela
@@ -130,10 +135,25 @@ public class saqueTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSacarActionPerformed
+
         // TODO add your handling code here:
         //metodos da classe sacar
         
         JOptionPane.showMessageDialog(null, "Saque realizado com sucesso.");
+
+        try {       
+            double valor = Double.parseDouble(jLabelValorSaldo.getText());
+            if (valor > 0) {
+                double novoSaldo = valor - conta.getSaldo();
+                conta.setSaldo(novoSaldo);
+                JOptionPane.showMessageDialog(null, "saque realizado com sucesso");
+            } else {
+                JOptionPane.showMessageDialog(null, "Nao tem saldo para sacar");
+            }
+        }catch (NumberFormatException ex){
+         System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");     
+        }
+
     }//GEN-LAST:event_jButtonSacarActionPerformed
 
     /**
