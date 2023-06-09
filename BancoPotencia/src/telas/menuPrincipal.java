@@ -4,7 +4,16 @@
  * and open the template in the editor.
  */
 package telas;
-
+import connection.Conection;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Elder
@@ -15,11 +24,40 @@ public class menuPrincipal extends javax.swing.JFrame {
     depositoTela deposito;
     poupancaTela poupanca;
     extratoTela extrato;
+    Conection con1=new Conection(); 
+    Connection connected;
+    DefaultTableModel modelo;
+    Statement st;
+    ResultSet rs;
+
+    
     /**
      * Creates new form menuPrincipal
      */
     public menuPrincipal() {
+
         initComponents();
+        setLocationRelativeTo(null);
+        
+        
+    }
+    public void construtor(int id){
+        int chama = id;
+        try {
+            connected = con1.getConnection();       
+            String sqlSelect1 = "SELECT id_conta_corrente, senha, saldo FROM banco_potencia.contacorrente WHERE id_conta_corrente = " + chama;
+            st = connected.createStatement();
+            rs = st.executeQuery(sqlSelect1);
+            if (rs.next()) {
+                double saldo = rs.getDouble("saldo");
+                jLabelValorSaldo.setText(Double.toString(saldo));
+            } else {
+                JOptionPane.showMessageDialog(null, "Aqui não nemnem");
+                this.dispose();
+            }
+        } catch (HeadlessException | SQLException e) {
+            System.err.println("Erro ao estabelecer a conexão com o banco de dados. Erro: " + e);
+        }
     }
 
     /**
@@ -108,19 +146,18 @@ public class menuPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabelTextSaldo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelValorSaldo))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(104, 104, 104)
-                                .addComponent(jLabel3)))
+                        .addContainerGap()
+                        .addComponent(jSeparator1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(jLabel3)
                         .addGap(0, 106, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jSeparator1)))
+                        .addComponent(jLabelTextSaldo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelValorSaldo)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(60, 60, 60)
@@ -256,10 +293,13 @@ public class menuPrincipal extends javax.swing.JFrame {
                 new menuPrincipal().setVisible(true);
             }
         });
+        
     }
-    public void recebeMenu(String recebe){
-        jLabelValorSaldo.setText(recebe);
-    }
+    
+    /*public void passaId(int id_conta){
+        setId(id_conta);
+    }*/
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDeposito;
     private javax.swing.JButton jButtonExtrato;

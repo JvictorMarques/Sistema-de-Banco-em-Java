@@ -311,14 +311,14 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
         String nome_fantasia = jTextCadJuNomeFantasia.getText();
         String data_abertura = jTextCadJuDataAbertura.getText();
         String cnpj = jTextCadJuCnpj.getText();
-        int cep = Integer.parseInt(jTextCadJuCep.getText());
+        String cep = jTextCadJuCep.getText();
         String rua = jTextCadJuRua.getText();
-        int numero = Integer.parseInt(jTextCadJuNumero.getText());
+        String numero = jTextCadJuNumero.getText();
         String cidade = jTextCadJuCidade.getText();
         String estado = jTextCadJuEstado.getText();
         String email = jTextCadJuEmail.getText();
-        int contato1 = Integer.parseInt(jTextCadJuContato1.getText());
-        int contato2 = Integer.parseInt(jTextCadJuContato2.getText());
+        String contato1 = jTextCadJuContato1.getText();
+        String contato2 = jTextCadJuContato2.getText();
         String atividade_economica = jTextCadJuAtividadeEconomica.getText();
         String grupo_economico = jTextCadJuGrupoEconomico.getText();
         String controle_acionario = jTextCadJuControleAcionario.getText();
@@ -327,33 +327,48 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
         String tipo_conta = "juridica";
         double saldo = 0;
         try {
-            if(razao_social.equals("") || data_abertura.equals("") || cnpj.equals("") || cep == 0 || rua.equals("") || numero == 0 || cidade.equals("") || estado.equals("") || email.equals("") || contato1 == 0 || contato2 == 0 || senha.equals("") || confirmar_senha.equals("")  || nome_fantasia.equals("")  || atividade_economica.equals("") || grupo_economico.equals("") || controle_acionario.equals("")) {
+            if(razao_social.equals("") || data_abertura.equals("") || cnpj.equals("") || cep.equals("") || rua.equals("") || numero.equals("") || cidade.equals("") || estado.equals("") || email.equals("") || contato1.equals("") || contato2.equals("") || senha.equals("") || confirmar_senha.equals("")  || nome_fantasia.equals("")  || atividade_economica.equals("") || grupo_economico.equals("") || controle_acionario.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");
             } else {
                 if(senha.equals(confirmar_senha)){
                     if(ConfirmaCadastro == null) {
-                        String sql = "INSERT INTO cadastro_pessoa_juridica(razao_social, data_abertura, cnpj, cep, rua, numero, cidade, estado, email, contato1, contato2, nome_fantasia, atividade_economica, grupo_economico, controle_acionario) VALUES ('" + razao_social + "','" + data_abertura + "','" + cnpj + "','" + cep + "','" + rua + "','" + numero + "','" + cidade + "','" + estado + "','" + email + "','" + contato1 + "','" + contato2 + "','" + nome_fantasia + "','" + atividade_economica + "','" + grupo_economico + "','" + controle_acionario + "')";
-                        connected = con1.getConnection();
-                        st = connected.createStatement();
-                        st.executeUpdate(sql);
-                        String sqlSelect = "SELECT LAST_INSERT_ID() AS id";
-                        st = connected.createStatement();
-                        rs = st.executeQuery(sqlSelect);
-                        int id_cadastro = 0;
-                        if (rs.next()) {
-                            id_cadastro = rs.getInt("id");
-                        }
-                        if (id_cadastro != 0) {
-                            String sqlInsertConta = "INSERT INTO conta(id_cliente, tipo_conta, saldo, senha) VALUES ('" + id_cadastro + "','" + tipo_conta + "','" + saldo + "','" + senha + "')";
-                            st.executeUpdate(sqlInsertConta);
-                        }
-                        String sqlSelectConta = "SELECT LAST_INSERT_ID() AS id_conta";
-                        st = connected.createStatement();
-                        rs = st.executeQuery(sqlSelectConta);
-                        int id_conta = 0;
-                        if (rs.next()) {
-                            id_conta = rs.getInt("id_conta");
-                        }
+                        String sql = "INSERT INTO cliente(id_banco, cnpj) VALUES('" + 1 + "','"+cnpj+"')";
+                    connected = con1.getConnection();
+                    st = connected.createStatement();
+                    st.executeUpdate(sql);
+                    String sqlSelect = "SELECT id_cliente from banco_potencia.cliente where cnpj like('"+ cnpj +"')";
+                    st = connected.createStatement();
+                    rs = st.executeQuery(sqlSelect);
+                    int id_cliente = 0;
+                    if (rs.next()) {
+                        id_cliente = rs.getInt("id_cliente");
+                    }
+                    if (id_cliente != 0) {
+                        String sqlConta = "INSERT INTO contacorrente(id_cliente, saldo, taxa, saldo_limite, senha) VALUES ('" + id_cliente + "', '" + 0 + "', '" + 0 + "', '" + 0 + "', '" + senha + "')";
+                        st.executeUpdate(sqlConta);
+                    }
+                    
+                    String sqlSelectConta = "SELECT id_conta_corrente FROM banco_potencia.contacorrente where id_cliente = ('" + id_cliente + "') ORDER BY id_conta_corrente desc limit 1";
+                    st = connected.createStatement();
+                    rs = st.executeQuery(sqlSelectConta);
+                    int id_conta = 0;
+                    if (rs.next()) {
+                        id_conta = rs.getInt("id_conta_corrente");
+                    }
+                    if (id_conta != 0) {
+                        String sqlPoupanca = "INSERT INTO contapoupanca(id_conta_corrente, rendimentos) VALUES ('" + id_conta + "', '" + 0 + "')";
+                        st.executeUpdate(sqlPoupanca);
+                        
+                        String sqlContato = "INSERT INTO contato(id_conta_corrente, email, contato1, contato2) VALUES ('" + id_conta + "', '" + email + "', '" + contato1 + "', '" + contato2 + "')";
+                        st.executeUpdate(sqlContato);
+                        
+                        String sqlEndereco = "INSERT INTO endereco(id_conta_corrente, logradouro, numero, cep, cidade, estado) VALUES ('" + id_conta + "', '" + rua + "', '" + numero + "', '" + cep + "', '" + cidade + "', '" + estado + "')";
+                        st.executeUpdate(sqlEndereco);
+                        
+                        String sqlPessoaJuridica = "INSERT INTO pessoajuridica(id_conta_corrente, cnpj, razao_social, nome_fantasia, atividade_economica, grupo_economico, controle_acionario, faturamento) VALUES ('" + id_conta + "', '" + cnpj + "', '" + razao_social + "', '" + nome_fantasia + "', '" + atividade_economica + "', '" + grupo_economico + "', '" + controle_acionario + "', '" + 0 + "')";
+                        st.executeUpdate(sqlPessoaJuridica);
+                        
+                    }
                         ConfirmaCadastro = new confirmaCadastro();
                         cadastroPessoaJuridica.this.dispose();
                         ConfirmaCadastro.setVisible(true);
