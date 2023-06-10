@@ -11,12 +11,24 @@ import bancopotencia.Sessao;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.lang.Double;
+import connection.Conection;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Elder
  */
 public class saqueTela extends javax.swing.JFrame {
+    Conection con1=new Conection(); 
+    Connection connected;
+    Statement st;
+    ResultSet rs;
     Conta conta;
     menuPrincipal menu;
 
@@ -154,6 +166,19 @@ public class saqueTela extends javax.swing.JFrame {
         if (valorSaque > 0 && valorSaque <= saldoConta) {
             double novoSaldo = saldoConta - valorSaque;
             conta.setSaldo(novoSaldo);
+            
+            connected = con1.getConnection();
+            String sql = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
+            try {
+                st = connected.createStatement();
+            } catch (SQLException ex) {
+                Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                st.executeUpdate(sql);
+            } catch (SQLException ex) {
+                Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog(null, "Saque realizado com sucesso. Novo saldo: " + novoSaldo);
             jLabelValorSaldo.setText(Double.toString(conta.getSaldo()));
         } else {
