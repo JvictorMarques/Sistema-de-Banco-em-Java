@@ -67,7 +67,6 @@ public class saqueTela extends javax.swing.JFrame {
         jLabel2.setText("Saldo: ");
 
         jLabelValorSaldo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelValorSaldo.setText("  ");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Digite o Valor que deseja sacar:");
@@ -158,38 +157,44 @@ public class saqueTela extends javax.swing.JFrame {
     private void jButtonSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSacarActionPerformed
         // TODO add your handling code here:
     // métodos da classe sacar
-
-    try {
-        Conta conta = Sessao.getInstance().getUsuario();
-        double valorSaque = Double.parseDouble(jTextValorSaque.getText());
-        double saldoConta = conta.getSaldo();
-
-        if (valorSaque > 0 && valorSaque <= saldoConta) {
-            double novoSaldo = saldoConta - valorSaque;
-            conta.setSaldo(novoSaldo);
-            
-            connected = con1.getConnection();
-            String sql = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
+    String teste = jTextValorSaque.getText();
+    if(teste.equals("")){
+        JOptionPane.showMessageDialog(null, "Digite um valor valido para saque");
+    }else{
             try {
-                st = connected.createStatement();
-            } catch (SQLException ex) {
-                Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                st.executeUpdate(sql);
-            } catch (SQLException ex) {
-                Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            conta1.adicionarTransacoes(conta.getIdConta(),conta.getIdConta(),0,"saque","debito",valorSaque);
-            JOptionPane.showMessageDialog(null, "Saque realizado com sucesso. Novo saldo: " + novoSaldo);
-            jLabelValorSaldo.setText(Double.toString(conta.getSaldo()));
-        } else {
-            JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
+                Conta conta = Sessao.getInstance().getUsuario();
+                double valorSaque = Double.parseDouble(jTextValorSaque.getText());
+                double saldoConta = conta.getSaldo();
+
+
+                if (valorSaque > 0 && valorSaque <= saldoConta) {
+                    double novoSaldo = saldoConta - valorSaque;
+                    conta.setSaldo(novoSaldo);
+
+                    connected = con1.getConnection();
+                    String sql = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
+                    try {
+                        st = connected.createStatement();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        st.executeUpdate(sql);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    conta1.adicionarTransacoes(conta.getIdConta(),conta.getIdConta(),0,"saque","debito",valorSaque);
+                    JOptionPane.showMessageDialog(null, "Saque realizado com sucesso. Novo saldo: " + novoSaldo);
+                    jLabelValorSaldo.setText(Double.toString(conta.getSaldo()));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
+                }
+        } catch (NumberFormatException ex) {
+           System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");
         }
-    } catch (NumberFormatException ex) {
-       System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");
     }
-
+    
+    
     }//GEN-LAST:event_jButtonSacarActionPerformed
 
     private void jTextValorSaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextValorSaqueActionPerformed
