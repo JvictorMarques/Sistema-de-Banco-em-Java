@@ -4,6 +4,14 @@ import java.util.Date;
 
 public class ContaPoupanca extends Conta {
     private int idContaPoupanca;
+
+    public int getIdContaPoupanca() {
+        return idContaPoupanca;
+    }
+
+    public void setIdContaPoupanca(int idContaPoupanca) {
+        this.idContaPoupanca = idContaPoupanca;
+    }
     private double rendimentos;
 
 
