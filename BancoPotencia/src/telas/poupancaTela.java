@@ -24,6 +24,11 @@ import javax.swing.JOptionPane;
 public class poupancaTela extends javax.swing.JFrame {
     poupancaAplicarTela aplicar;
     poupancaSacarTela sacar;
+    Conection con1=new Conection(); 
+    Connection connected;
+    Statement st;
+    ResultSet rs;
+    ContaPoupanca c1;
     /**
      * Creates new form poupancaTela
      */
