@@ -202,7 +202,11 @@ public class poupancaTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAplicarActionPerformed
-        Conta conta = Sessao.getInstance().getUsuario();
+        String teste = jValorAplicar.getText();
+        if(teste.equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha o campo de aplicação");
+        }else{
+            Conta conta = Sessao.getInstance().getUsuario();
         double aplicacao = Double.parseDouble(jValorAplicar.getText());
         if(jValorAplicar.equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo de aplicação");
@@ -241,50 +245,57 @@ public class poupancaTela extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Sem saldo");
             }
         } 
+        }
+        
     }//GEN-LAST:event_jButtonAplicarActionPerformed
 
     private void jButtonResgatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResgatarActionPerformed
         // TODO add your handling code here:
-        Conta conta = Sessao.getInstance().getUsuario();
-        double resgate = Double.parseDouble(jValorResgatar.getText());
-
-        if(jValorResgatar.equals("")) {
+        String teste = jValorResgatar.getText();
+        if(teste.equals("")){
             JOptionPane.showMessageDialog(null, "Preencha o campo de aplicação");
-        } else {
-            if(resgate > 0 && c1.getRendimentos() >= resgate){
-                double novoSaldoP = c1.getRendimentos()- resgate  ;
-                double novoSaldoC = resgate + conta.getSaldo() ;
+        }else{
+            Conta conta = Sessao.getInstance().getUsuario();
+            double resgate = Double.parseDouble(jValorResgatar.getText());
 
-                conta.setSaldo(novoSaldoC);
+            if(jValorResgatar.equals("")) {
+                JOptionPane.showMessageDialog(null, "Preencha o campo de aplicação");
+            } else {
+                if(resgate > 0 && c1.getRendimentos() >= resgate){
+                    double novoSaldoP = c1.getRendimentos()- resgate  ;
+                    double novoSaldoC = resgate + conta.getSaldo() ;
 
-                try {
-                    c1.setRendimentos(novoSaldoP);
-                } catch (SQLException ex) {
-                    Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+                    conta.setSaldo(novoSaldoC);
+
+                    try {
+                        c1.setRendimentos(novoSaldoP);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    connected = con1.getConnection();
+                    String sql = "UPDATE banco_potencia.contapoupanca SET rendimentos = "+c1.getRendimentos()+" WHERE (id_conta_poupanca = "+c1.getIdContaPoupanca()+")";
+                    try {
+                        st.executeUpdate(sql);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    String sql2 = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
+                    try {
+                        st.executeUpdate(sql2);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    conta1.adicionarTransacoes(conta.getIdConta(),conta.getIdConta(),c1.getIdContaPoupanca(),"poupanca_resgatar","credito",resgate);
+                    jLabelValorSaldo1.setText(Double.toString(conta.getSaldo()));
+                    jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
+                    JOptionPane.showMessageDialog(null, "Resgate realizado com sucesso. Novo saldo: " + novoSaldoC);
+
+                }else{
+                    JOptionPane.showMessageDialog(null, "Digite um valor válido.");
                 }
-
-                connected = con1.getConnection();
-                String sql = "UPDATE banco_potencia.contapoupanca SET rendimentos = "+c1.getRendimentos()+" WHERE (id_conta_poupanca = "+c1.getIdContaPoupanca()+")";
-                try {
-                    st.executeUpdate(sql);
-                } catch (SQLException ex) {
-                    Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                String sql2 = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
-                try {
-                    st.executeUpdate(sql2);
-                } catch (SQLException ex) {
-                    Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                conta1.adicionarTransacoes(conta.getIdConta(),conta.getIdConta(),c1.getIdContaPoupanca(),"poupanca_resgatar","credito",resgate);
-                jLabelValorSaldo1.setText(Double.toString(conta.getSaldo()));
-                jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
-                JOptionPane.showMessageDialog(null, "Resgate realizado com sucesso. Novo saldo: " + novoSaldoC);
-
-            }else{
-                JOptionPane.showMessageDialog(null, "Digite um valor válido.");
-            }
-        } 
+            } 
+        }
     }//GEN-LAST:event_jButtonResgatarActionPerformed
 
     /**
