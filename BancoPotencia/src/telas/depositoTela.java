@@ -139,7 +139,18 @@ public class depositoTela extends javax.swing.JFrame {
         if(valor > 0){
             double novoValor = valor + conta.getSaldo();
             conta.setSaldo(novoValor);
-            
+            connected = con1.getConnection();
+            String sql = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
+            try {
+                st = connected.createStatement();
+            } catch (SQLException ex) {
+                Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                st.executeUpdate(sql);
+            } catch (SQLException ex) {
+                Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog(null,"deposito realizada");
         }else{
             JOptionPane.showMessageDialog(null,"erro no deposito");

@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -80,7 +82,6 @@ public class poupancaTela extends javax.swing.JFrame {
         jValorResgatar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(450, 550));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -181,9 +182,9 @@ public class poupancaTela extends javax.swing.JFrame {
                             .addComponent(jValorAplicar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jValorResgatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonAplicar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonResgatar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonResgatar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonAplicar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,10 +209,28 @@ public class poupancaTela extends javax.swing.JFrame {
             double novoSaldoC = conta.getSaldo() - aplicacao;
             
             conta.setSaldo(novoSaldoC);
-            c1.setRendimentos(novoSaldoP);
+            try {
+                c1.setRendimentos(novoSaldoP);
+            } catch (SQLException ex) {
+                Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             jLabelValorSaldo1.setText(Double.toString(conta.getSaldo()));
             jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
+            int id = c1.getIdContaPoupanca();
+            connected = con1.getConnection();
+            String sql = "UPDATE banco_potencia.contapoupanca SET rendimentos = '"+c1.getRendimentos()+"' WHERE (id_conta_poupanca = '"+c1.getIdContaPoupanca()+"')";
+            try {
+                st.executeUpdate(sql);
+            } catch (SQLException ex) {
+                Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String sql2 = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
+            try {
+                st.executeUpdate(sql2);
+            } catch (SQLException ex) {
+                Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog(null, c1.getRendimentos());
             
         }else{
@@ -229,7 +248,26 @@ public class poupancaTela extends javax.swing.JFrame {
             double novoSaldoC = resgate + conta.getSaldo() ;
             
             conta.setSaldo(novoSaldoC);
-            c1.setRendimentos(novoSaldoP);
+
+            try {
+                c1.setRendimentos(novoSaldoP);
+            } catch (SQLException ex) {
+                Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            connected = con1.getConnection();
+            String sql = "UPDATE banco_potencia.contapoupanca SET rendimentos = "+c1.getRendimentos()+" WHERE (id_conta_poupanca = "+c1.getIdContaPoupanca()+")";
+            try {
+                st.executeUpdate(sql);
+            } catch (SQLException ex) {
+                Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String sql2 = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
+            try {
+                st.executeUpdate(sql2);
+            } catch (SQLException ex) {
+                Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             jLabelValorSaldo1.setText(Double.toString(conta.getSaldo()));
             jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));

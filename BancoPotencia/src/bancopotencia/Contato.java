@@ -2,10 +2,10 @@ package bancopotencia;
 
 public class Contato {
     private String email;
-    private int contato1;
-    private int contato2;
+    private String contato1;
+    private String contato2;
 
-    public Contato(String email, int contato1, int contato2) {
+    public Contato(String email, String contato1, String contato2) {
         this.email = email;
         this.contato1 = contato1;
         this.contato2 = contato2;
@@ -20,19 +20,20 @@ public class Contato {
         this.email = email;
     }
 
-    public int getContato1() {
+    public String getContato1() {
         return contato1;
     }
 
-    public void setContato1(int contato1) {
+    public void setContato1(String contato1) {
         this.contato1 = contato1;
+
     }
 
-    public int getContato2() {
+    public String getContato2() {
         return contato2;
     }
 
-    public void setContato2(int contato2) {
+    public void setContato2(String contato2) {
         this.contato2 = contato2;
     }
 }

@@ -216,8 +216,8 @@ public class menuPrincipal extends javax.swing.JFrame {
             rs = st.executeQuery(sqlContato);
             if(rs.next()){
                 String email = rs.getString("email");
-                int contato1 = rs.getInt("contato1");
-                int contato2 = rs.getInt("contato2");
+                String contato1 = rs.getString("contato1");
+                String contato2 = rs.getString("contato2");
                 Contato contato = new Contato(email,contato1,contato2);
             } else{
                 JOptionPane.showMessageDialog(null, "nao entrou2");
