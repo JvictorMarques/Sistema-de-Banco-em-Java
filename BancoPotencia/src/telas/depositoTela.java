@@ -115,28 +115,34 @@ public class depositoTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepositarActionPerformed
-        Conta conta = Sessao.getInstance().getUsuario();
-        double valor = Double.parseDouble(jTextFieldValorDeposito.getText());
-        if(valor > 0){
-            double novoValor = valor + conta.getSaldo();
-            conta.setSaldo(novoValor);
-            connected = con1.getConnection();
-            String sql = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
-            try {
-                st = connected.createStatement();
-            } catch (SQLException ex) {
-                Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                st.executeUpdate(sql);
-            } catch (SQLException ex) {
-                Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            conta1.adicionarTransacoes(conta.getIdConta(),conta.getIdConta(),0,"deposito","credito",valor);
-            JOptionPane.showMessageDialog(null, "Saque realizado com sucesso. Novo saldo: " + valor);
+        String teste = jTextFieldValorDeposito.getText();
+        if(teste.equals("")){
+            JOptionPane.showMessageDialog(null,"Digite  Valor para depositar.");
         }else{
-            JOptionPane.showMessageDialog(null,"erro no deposito");
+            Conta conta = Sessao.getInstance().getUsuario();
+            double valor = Double.parseDouble(jTextFieldValorDeposito.getText());
+            if(valor > 0){
+                double novoValor = valor + conta.getSaldo();
+                conta.setSaldo(novoValor);
+                connected = con1.getConnection();
+                String sql = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
+                try {
+                    st = connected.createStatement();
+                } catch (SQLException ex) {
+                    Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    st.executeUpdate(sql);
+                } catch (SQLException ex) {
+                    Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                conta1.adicionarTransacoes(conta.getIdConta(),conta.getIdConta(),0,"deposito","credito",valor);
+                JOptionPane.showMessageDialog(null, "Saque realizado com sucesso. Novo saldo: " + valor);
+            }else{
+                JOptionPane.showMessageDialog(null,"erro no deposito");
+            }
         }
+        
     }//GEN-LAST:event_jButtonDepositarActionPerformed
 
     /**
