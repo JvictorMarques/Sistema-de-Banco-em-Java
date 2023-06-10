@@ -196,6 +196,29 @@ public class poupancaTela extends javax.swing.JFrame {
         // TODO add your handling code here:
         poupancaSacarTela sacar = new poupancaSacarTela();
         sacar.setVisible(true);
+        Conta conta = Sessao.getInstance().getUsuario();
+        int id_conta = conta.getIdConta();
+
+        try {
+            connected = con1.getConnection();
+            String sqlSelect1 = "SELECT * FROM banco_potencia.contapoupanca where id_conta_corrente = " + id_conta;
+            st = connected.createStatement();
+            rs = st.executeQuery(sqlSelect1);
+            if (rs.next()) {
+
+                double saldo = rs.getDouble("rendimentos");
+                int idContaPoupanca = rs.getInt("id_conta_Poupanca");
+                ContaPoupanca c1= new ContaPoupanca(idContaPoupanca, saldo);
+                jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
+                sacar.poupancaSaca(c1);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Aqui não nemnem");
+
+            }
+        } catch (HeadlessException | SQLException e) {
+            System.err.println("Erro ao estabelecer a conexão com o banco de dados. Erro: " + e);
+        }
     }//GEN-LAST:event_jButtonResgatarActionPerformed
 
     /**

@@ -5,6 +5,9 @@
  */
 package telas;
 
+import bancopotencia.Conta;
+import bancopotencia.ContaPoupanca;
+import bancopotencia.Sessao;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,14 +15,22 @@ import javax.swing.JOptionPane;
  * @author Elder
  */
 public class poupancaSacarTela extends javax.swing.JFrame {
-
+    ContaPoupanca c1;
     /**
      * Creates new form poupancaAplicarTela
      */
     public poupancaSacarTela() {
         initComponents();
     }
-
+    public void poupancaSaca(ContaPoupanca c1){
+        Conta conta = Sessao.getInstance().getUsuario();
+        double saldoCorrente = conta.getSaldo();
+        jLabel3.setText(Double.toString(saldoCorrente));
+        
+        ContaPoupanca contaP = c1;
+        
+        jLabel5.setText(Double.toString(contaP.getRendimentos()));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
