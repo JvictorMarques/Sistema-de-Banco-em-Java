@@ -8,14 +8,29 @@ package telas;
 import bancopotencia.Conta;
 import bancopotencia.Sessao;
 import java.awt.HeadlessException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import connection.Conection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 
 /**
  *
  * @author Elder
  */
 public class depositoTela extends javax.swing.JFrame {
+    Conection con1=new Conection(); 
+    Connection connected;
+    Statement st;
+    ResultSet rs;
+    Sessao sessao;
     Conta conta;
 
     /**
@@ -119,23 +134,14 @@ public class depositoTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDepositarActionPerformed
-        try {  
-            
-            Conta conta = Sessao.getInstance().getUsuario();
-            double valorDeposito = Double.parseDouble(jTextFieldValorDeposito.getText());
-            // Verifica se o valor do depósito é válido (maior que zero)
-            if (valorDeposito > 0) {
-                // Realiza o depósito na conta
-                double novoSaldo = valorDeposito + conta.getSaldo();
-                conta.setSaldo(novoSaldo);
-                String nome = Double.toString(conta.getSaldo());
-                JOptionPane.showMessageDialog(null, nome);
-            } else {
-                // O valor do depósito é inválido
-                JOptionPane.showMessageDialog(null, "Valor de depósito inválido");
-            }
-        } catch (NumberFormatException ex) {
-             System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");
+        Conta conta = Sessao.getInstance().getUsuario();
+        double valor = Double.parseDouble(jTextFieldValorDeposito.getText());
+        if(valor > 0){
+            double novoValor = valor + conta.getSaldo();
+            conta.setSaldo(novoValor);
+            JOptionPane.showMessageDialog(null,"deposito realizada");
+        }else{
+            JOptionPane.showMessageDialog(null,"erro no deposito");
         }
     }//GEN-LAST:event_jButtonDepositarActionPerformed
 

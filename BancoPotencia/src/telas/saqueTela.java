@@ -148,7 +148,7 @@ public class saqueTela extends javax.swing.JFrame {
 
     try {
         Conta conta = Sessao.getInstance().getUsuario();
-        double valorSaque = Double.parseDouble(jTextFieldValorSaque.getText());
+        double valorSaque = Double.parseDouble(jTextValorSaque.getText());
         double saldoConta = conta.getSaldo();
 
         if (valorSaque > 0 && valorSaque <= saldoConta) {
