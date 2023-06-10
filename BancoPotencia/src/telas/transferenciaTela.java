@@ -187,6 +187,7 @@ public class transferenciaTela extends javax.swing.JFrame {
                     st.executeUpdate(sql);
                     
                     JOptionPane.showMessageDialog(null,"transferencia com sucesso");
+                    jLabelValorSaldo.setText(Double.toString(conta.getSaldo()));
                     
                 }else{
                    JOptionPane.showMessageDialog(null, "A conta informada nao existe");

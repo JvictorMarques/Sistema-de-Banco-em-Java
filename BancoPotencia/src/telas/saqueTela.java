@@ -155,6 +155,7 @@ public class saqueTela extends javax.swing.JFrame {
             double novoSaldo = saldoConta - valorSaque;
             conta.setSaldo(novoSaldo);
             JOptionPane.showMessageDialog(null, "Saque realizado com sucesso. Novo saldo: " + novoSaldo);
+            jLabelValorSaldo.setText(Double.toString(conta.getSaldo()));
         } else {
             JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
         }
