@@ -5,6 +5,9 @@
  */
 package telas;
 
+import bancopotencia.Conta;
+import bancopotencia.ContaPoupanca;
+import bancopotencia.Sessao;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +21,17 @@ public class poupancaAplicarTela extends javax.swing.JFrame {
      */
     public poupancaAplicarTela() {
         initComponents();
+        
+    }
+    public void poupanca(ContaPoupanca c1){
+        Conta conta = Sessao.getInstance().getUsuario();
+        double saldoCorrente = conta.getSaldo();
+        jLabel3.setText(Double.toString(saldoCorrente));
+        
+        ContaPoupanca contaP = c1;
+        
+        jLabel5.setText(Double.toString(contaP.getRendimentos()));
+        
     }
 
     /**
@@ -183,6 +197,7 @@ public class poupancaAplicarTela extends javax.swing.JFrame {
             }
         });
     }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAplicar;

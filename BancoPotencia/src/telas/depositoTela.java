@@ -139,6 +139,7 @@ public class depositoTela extends javax.swing.JFrame {
         if(valor > 0){
             double novoValor = valor + conta.getSaldo();
             conta.setSaldo(novoValor);
+            
             JOptionPane.showMessageDialog(null,"deposito realizada");
         }else{
             JOptionPane.showMessageDialog(null,"erro no deposito");

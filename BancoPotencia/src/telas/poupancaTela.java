@@ -34,7 +34,6 @@ public class poupancaTela extends javax.swing.JFrame {
      */
     public poupancaTela() {
         initComponents();
-        initComponents();
         Conta conta = Sessao.getInstance().getUsuario();
         int id_conta = conta.getIdConta();
 
@@ -47,10 +46,9 @@ public class poupancaTela extends javax.swing.JFrame {
 
                 double saldo = rs.getDouble("rendimentos");
                 int idContaPoupanca = rs.getInt("id_conta_Poupanca");
-
                 ContaPoupanca c1= new ContaPoupanca(idContaPoupanca, saldo);
-
                 jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
+                
                 
             } else {
                 JOptionPane.showMessageDialog(null, "Aqui não nemnem");
@@ -168,6 +166,30 @@ public class poupancaTela extends javax.swing.JFrame {
     private void jButtonAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAplicarActionPerformed
         poupancaAplicarTela aplicar = new poupancaAplicarTela();
         aplicar.setVisible(true);
+        Conta conta = Sessao.getInstance().getUsuario();
+        int id_conta = conta.getIdConta();
+
+        try {
+            connected = con1.getConnection();
+            String sqlSelect1 = "SELECT * FROM banco_potencia.contapoupanca where id_conta_corrente = " + id_conta;
+            st = connected.createStatement();
+            rs = st.executeQuery(sqlSelect1);
+            if (rs.next()) {
+
+                double saldo = rs.getDouble("rendimentos");
+                int idContaPoupanca = rs.getInt("id_conta_Poupanca");
+                ContaPoupanca c1= new ContaPoupanca(idContaPoupanca, saldo);
+                jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
+                aplicar.poupanca(c1);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Aqui não nemnem");
+
+            }
+        } catch (HeadlessException | SQLException e) {
+            System.err.println("Erro ao estabelecer a conexão com o banco de dados. Erro: " + e);
+        }
+        
     }//GEN-LAST:event_jButtonAplicarActionPerformed
 
     private void jButtonResgatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResgatarActionPerformed
@@ -210,7 +232,7 @@ public class poupancaTela extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAplicar;
     private javax.swing.JButton jButtonResgatar;

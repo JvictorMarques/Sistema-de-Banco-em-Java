@@ -185,7 +185,7 @@ public class transferenciaTela extends javax.swing.JFrame {
                     conta.setSaldo(novoSaldo);
                     String sql = "UPDATE banco_potencia.contacorrente SET saldo = '"+saldoDestino+"' WHERE (id_conta_corrente = '"+id_conta+"')";
                     st.executeUpdate(sql);
-
+                    
                     JOptionPane.showMessageDialog(null,"transferencia com sucesso");
                     
                 }else{
