@@ -205,6 +205,8 @@ public class poupancaTela extends javax.swing.JFrame {
         Conta conta = Sessao.getInstance().getUsuario();
         double aplicacao = Double.parseDouble(jValorAplicar.getText());
         if(jValorAplicar.equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo de aplicação");
+        } else {    
             if(aplicacao > 0 && aplicacao <= conta.getSaldo()){
                 double novoSaldoP = aplicacao + c1.getRendimentos();
                 double novoSaldoC = conta.getSaldo() - aplicacao;
@@ -238,17 +240,17 @@ public class poupancaTela extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(null, "Sem saldo");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Preencha o campo de aplicação");
-        }
+        } 
     }//GEN-LAST:event_jButtonAplicarActionPerformed
 
     private void jButtonResgatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResgatarActionPerformed
         // TODO add your handling code here:
         Conta conta = Sessao.getInstance().getUsuario();
         double resgate = Double.parseDouble(jValorResgatar.getText());
-        
+
         if(jValorResgatar.equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha o campo de aplicação");
+        } else {
             if(resgate > 0 && c1.getRendimentos() >= resgate){
                 double novoSaldoP = c1.getRendimentos()- resgate  ;
                 double novoSaldoC = resgate + conta.getSaldo() ;
@@ -282,7 +284,7 @@ public class poupancaTela extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(null, "Digite um valor válido.");
             }
-        }
+        } 
     }//GEN-LAST:event_jButtonResgatarActionPerformed
 
     /**
