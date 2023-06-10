@@ -166,25 +166,8 @@ public class poupancaTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAplicarActionPerformed
-        Conta conta = Sessao.getInstance().getUsuario();
-        try{
-            double valor = conta.getSaldo();
-            if (valor > 0) {
-                if(valor<15){
-                double novoSaldo = valor * 10;
-                conta.setSaldo(novoSaldo);
-                String nome = Double.toString(conta.getSaldo());
-                JOptionPane.showMessageDialog(null, nome);
-                }else{
-                    JOptionPane.showMessageDialog(null, "Valor nao alterado");
-                }
-            } else {
-                
-                JOptionPane.showMessageDialog(null, "Valor inválido");
-            }
-        }catch(NumberFormatException ex){
-        System.err.println("Erro ao estabelecer a conexao com o banco de dados. Erro");
-        }
+        poupancaAplicarTela aplicar = new poupancaAplicarTela();
+        aplicar.setVisible(true);
     }//GEN-LAST:event_jButtonAplicarActionPerformed
 
     private void jButtonResgatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResgatarActionPerformed
