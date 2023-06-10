@@ -25,7 +25,6 @@ public class telaLogin extends javax.swing.JFrame {
     confirmaCadastro ConfirmaCadastro;
     Conection con1=new Conection(); 
     Connection connected;
-    DefaultTableModel modelo;
     Statement st;
     ResultSet rs;
     int idc;
