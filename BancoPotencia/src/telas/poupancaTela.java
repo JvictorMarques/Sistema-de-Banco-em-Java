@@ -22,8 +22,7 @@ import javax.swing.JOptionPane;
  * @author Elder
  */
 public class poupancaTela extends javax.swing.JFrame {
-    poupancaAplicarTela aplicar;
-    poupancaSacarTela sacar;
+    
     Conection con1=new Conection(); 
     Connection connected;
     Statement st;
@@ -36,7 +35,7 @@ public class poupancaTela extends javax.swing.JFrame {
         initComponents();
         Conta conta = Sessao.getInstance().getUsuario();
         int id_conta = conta.getIdConta();
-
+        jLabelValorSaldo1.setText(Double.toString(conta.getSaldo()));
         try {
             connected = con1.getConnection();
             String sqlSelect1 = "SELECT * FROM banco_potencia.contapoupanca where id_conta_corrente = " + id_conta;
@@ -46,7 +45,7 @@ public class poupancaTela extends javax.swing.JFrame {
 
                 double saldo = rs.getDouble("rendimentos");
                 int idContaPoupanca = rs.getInt("id_conta_Poupanca");
-                ContaPoupanca c1= new ContaPoupanca(idContaPoupanca, saldo);
+                c1= new ContaPoupanca(idContaPoupanca, saldo);
                 jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
                 
                 
@@ -74,15 +73,21 @@ public class poupancaTela extends javax.swing.JFrame {
         jButtonVoltar = new javax.swing.JButton();
         jButtonAplicar = new javax.swing.JButton();
         jButtonResgatar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabelValorSaldo1 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jValorAplicar = new javax.swing.JTextField();
+        jValorResgatar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(450, 550));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("POUPANÇA");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Saldo: ");
+        jLabel2.setText("Saldo Poupança : ");
 
         jLabelValorSaldo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelValorSaldo.setText("  ");
@@ -111,47 +116,78 @@ public class poupancaTela extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setText("Saldo Conta Corrente : ");
+
+        jLabelValorSaldo1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelValorSaldo1.setText("  ");
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jButtonAplicar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonResgatar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(jLabel1))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelValorSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButtonAplicar, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                    .addComponent(jValorAplicar))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButtonResgatar, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                    .addComponent(jValorResgatar)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelValorSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addComponent(jLabelValorSaldo1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel1)
-                .addGap(70, 70, 70)
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabelValorSaldo1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabelValorSaldo))
-                .addGap(133, 133, 133)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAplicar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonResgatar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jValorAplicar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jValorResgatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonAplicar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonResgatar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -164,60 +200,43 @@ public class poupancaTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAplicarActionPerformed
-        poupancaAplicarTela aplicar = new poupancaAplicarTela();
-        aplicar.setVisible(true);
         Conta conta = Sessao.getInstance().getUsuario();
-        int id_conta = conta.getIdConta();
+        double aplicacao = Double.parseDouble(jValorAplicar.getText());
 
-        try {
-            connected = con1.getConnection();
-            String sqlSelect1 = "SELECT * FROM banco_potencia.contapoupanca where id_conta_corrente = " + id_conta;
-            st = connected.createStatement();
-            rs = st.executeQuery(sqlSelect1);
-            if (rs.next()) {
-
-                double saldo = rs.getDouble("rendimentos");
-                int idContaPoupanca = rs.getInt("id_conta_Poupanca");
-                ContaPoupanca c1= new ContaPoupanca(idContaPoupanca, saldo);
-                jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
-                aplicar.poupanca(c1);
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "Aqui não nemnem");
-
-            }
-        } catch (HeadlessException | SQLException e) {
-            System.err.println("Erro ao estabelecer a conexão com o banco de dados. Erro: " + e);
+        if(aplicacao > 0 && aplicacao < conta.getSaldo()){
+            double novoSaldoP = aplicacao + c1.getRendimentos();
+            double novoSaldoC = conta.getSaldo() - aplicacao;
+            
+            conta.setSaldo(novoSaldoC);
+            c1.setRendimentos(novoSaldoP);
+            
+            jLabelValorSaldo1.setText(Double.toString(conta.getSaldo()));
+            jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
+            JOptionPane.showMessageDialog(null, c1.getRendimentos());
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Tas liso é ?");
         }
-        
     }//GEN-LAST:event_jButtonAplicarActionPerformed
 
     private void jButtonResgatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResgatarActionPerformed
         // TODO add your handling code here:
-        poupancaSacarTela sacar = new poupancaSacarTela();
-        sacar.setVisible(true);
         Conta conta = Sessao.getInstance().getUsuario();
-        int id_conta = conta.getIdConta();
+        double resgate = Double.parseDouble(jValorResgatar.getText());
 
-        try {
-            connected = con1.getConnection();
-            String sqlSelect1 = "SELECT * FROM banco_potencia.contapoupanca where id_conta_corrente = " + id_conta;
-            st = connected.createStatement();
-            rs = st.executeQuery(sqlSelect1);
-            if (rs.next()) {
-
-                double saldo = rs.getDouble("rendimentos");
-                int idContaPoupanca = rs.getInt("id_conta_Poupanca");
-                ContaPoupanca c1= new ContaPoupanca(idContaPoupanca, saldo);
-                jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
-                sacar.poupancaSaca(c1);
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "Aqui não nemnem");
-
-            }
-        } catch (HeadlessException | SQLException e) {
-            System.err.println("Erro ao estabelecer a conexão com o banco de dados. Erro: " + e);
+        if(resgate > 0 && c1.getRendimentos() > resgate){
+            double novoSaldoP = c1.getRendimentos()- resgate  ;
+            double novoSaldoC = resgate + conta.getSaldo() ;
+            
+            conta.setSaldo(novoSaldoC);
+            c1.setRendimentos(novoSaldoP);
+            
+            jLabelValorSaldo1.setText(Double.toString(conta.getSaldo()));
+            jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
+            JOptionPane.showMessageDialog(null, c1.getRendimentos());
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Digite um valor válido.");
         }
     }//GEN-LAST:event_jButtonResgatarActionPerformed
 
@@ -255,13 +274,17 @@ public class poupancaTela extends javax.swing.JFrame {
             }
         });
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAplicar;
     private javax.swing.JButton jButtonResgatar;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelValorSaldo;
+    private javax.swing.JLabel jLabelValorSaldo1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField jValorAplicar;
+    private javax.swing.JTextField jValorResgatar;
     // End of variables declaration//GEN-END:variables
 }
