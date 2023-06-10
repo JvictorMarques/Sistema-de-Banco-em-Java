@@ -1,5 +1,6 @@
 package telas;
 
+import bancopotencia.Conta;
 import bancopotencia.Sessao;
 import connection.Conection;
 import java.awt.HeadlessException;
@@ -24,8 +25,11 @@ public class extratoTela extends javax.swing.JFrame {
     }
     public void mostrar_tabela() {
         try {
+            Conta conta = Sessao.getInstance().getUsuario();
+            jLabelNumeroConta.setText(Integer.toString(conta.getIdConta()));
+            jLabelSaldoConta.setText(Double.toString(conta.getSaldo()));
             connected = con1.getConnection();
-            String sql = "SELECT id_conta_destinario, tipo_transacao, valor_transacao, data_criacao FROM banco_potencia.transacoes WHERE id_conta_emissor = " + 55800;
+            String sql = "SELECT * FROM banco_potencia.transacoes WHERE id_conta_emissor = " + conta.getIdConta();
             st = connected.createStatement();
             rs = st.executeQuery(sql);
             Object[] extrato = new Object[4];
@@ -80,10 +84,7 @@ public class extratoTela extends javax.swing.JFrame {
 
         jTableTabelaTransacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Destinatário", "Tipo", "Valor", "Data"
