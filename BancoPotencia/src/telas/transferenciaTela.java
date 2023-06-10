@@ -170,35 +170,42 @@ public class transferenciaTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonTransferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransferirActionPerformed
-     try {
-            Conta conta = Sessao.getInstance().getUsuario();
-            int id_conta = Integer.parseInt(jTextNumeroDaConta.getText());
-            if(id_conta !=conta.getIdConta()){
-                connected = con1.getConnection();       
-                String sqlSelect = "SELECT id_conta_corrente, saldo FROM banco_potencia.contacorrente WHERE id_conta_corrente = " + id_conta;
-                st = connected.createStatement();
-                rs = st.executeQuery(sqlSelect);
-                double digita = Double.parseDouble(jTextFieldValorTransferencia.getText());
-                if (rs.next() && conta.getSaldo() > digita) {
-                    double saldoBanco = rs.getDouble("saldo");
-                    double saldoDestino = saldoBanco + digita;
-                    double novoSaldo = conta.getSaldo() - digita;
-                    conta.setSaldo(novoSaldo);
-                    String sql = "UPDATE banco_potencia.contacorrente SET saldo = '"+saldoDestino+"' WHERE (id_conta_corrente = '"+id_conta+"')";
-                    st.executeUpdate(sql);
-                    conta1.adicionarTransacoes(id_conta,conta.getIdConta(),0,"transferencia","debito",saldoDestino);
-                    JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso. Novo saldo: " + saldoDestino);
-                    jLabelValorSaldo.setText(Double.toString(conta.getSaldo()));
-                    
+        String teste1 = jTextNumeroDaConta.getText();
+        String teste2 = jTextFieldValorTransferencia.getText();
+        if(teste1.equals("") || teste2.equals("")){
+            JOptionPane.showMessageDialog(null, "Não é permitido campos vazios");
+        }else{
+            try {
+                Conta conta = Sessao.getInstance().getUsuario();
+                int id_conta = Integer.parseInt(jTextNumeroDaConta.getText());
+                if(id_conta !=conta.getIdConta()){
+                    connected = con1.getConnection();       
+                    String sqlSelect = "SELECT id_conta_corrente, saldo FROM banco_potencia.contacorrente WHERE id_conta_corrente = " + id_conta;
+                    st = connected.createStatement();
+                    rs = st.executeQuery(sqlSelect);
+                    double digita = Double.parseDouble(jTextFieldValorTransferencia.getText());
+                    if (rs.next() && conta.getSaldo() > digita) {
+                        double saldoBanco = rs.getDouble("saldo");
+                        double saldoDestino = saldoBanco + digita;
+                        double novoSaldo = conta.getSaldo() - digita;
+                        conta.setSaldo(novoSaldo);
+                        String sql = "UPDATE banco_potencia.contacorrente SET saldo = '"+saldoDestino+"' WHERE (id_conta_corrente = '"+id_conta+"')";
+                        st.executeUpdate(sql);
+                        conta1.adicionarTransacoes(id_conta,conta.getIdConta(),0,"transferencia","debito",digita);
+                        JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso. Novo saldo: " + conta.getSaldo());
+                        jLabelValorSaldo.setText(Double.toString(conta.getSaldo()));
+
+                    }else{
+                       JOptionPane.showMessageDialog(null, "A conta informada nao existe");
+                    }
                 }else{
-                   JOptionPane.showMessageDialog(null, "A conta informada nao existe");
+
                 }
-            }else{
-                
-            }
         } catch (HeadlessException | SQLException e) {
             System.err.println("Erro ao estabelecer a conexão com o banco de dados. Erro: " + e);
         }
+        }
+        
     }//GEN-LAST:event_jButtonTransferirActionPerformed
 
     private void jTextFieldValorTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorTransferenciaActionPerformed
