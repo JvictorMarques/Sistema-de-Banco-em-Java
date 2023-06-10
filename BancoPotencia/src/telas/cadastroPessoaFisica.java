@@ -277,8 +277,6 @@ public class cadastroPessoaFisica extends javax.swing.JFrame {
         String contato2 = jTextCadFiContato2.getText();
         String senha = jPasswordCadFiConSenha.getText();
         String confirmar_senha = jPasswordCadFiSenha.getText();
-        String tipo_conta = "fisica";
-        double saldo = 0;
         try {
              if(nome.equals("") || data_nascimento.equals("") || cpf.equals("") || cep.equals("") || rua.equals("") || numero.equals("") || cidade.equals("") || estado.equals("") || email.equals("") || contato1.equals("") || contato2.equals("") || senha.equals("") || confirmar_senha.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");

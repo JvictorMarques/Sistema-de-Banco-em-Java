@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package bancopotencia;
 
-import java.util.Date;
+import connection.Conection;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Elder
- */
+
 public class Conta {
     private int idConta;
     private String tipoPessoa;
@@ -20,6 +19,10 @@ public class Conta {
     private int operacao;
     private String senha;
     private ArrayList<Transacao> transacoes = new ArrayList();
+    Conection con1=new Conection(); 
+    Connection connected;
+    Statement st;
+    ResultSet rs;
 
     public Conta(int idConta, double saldo){
 
@@ -81,6 +84,17 @@ public class Conta {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+    
+    public void adicionarTransacoes(int id_conta_destinario, int id_conta_emissor,int id_conta_poupanca, String tipo_transacao, String credito_debito, double valor_transacao) {
+        try {
+            String sql = "INSERT INTO transacoes(id_conta_destinario, id_conta_emissor, id_conta_poupanca, tipo_transacao, credito_debito, valor_transacao) VALUES('"+id_conta_destinario+"','"+id_conta_emissor+"','"+id_conta_poupanca+"','"+tipo_transacao+"','"+credito_debito+"','"+valor_transacao+"')";
+            connected = con1.getConnection();
+            st = connected.createStatement();
+            st.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void transferir(double valor, int idContaRecebedor){

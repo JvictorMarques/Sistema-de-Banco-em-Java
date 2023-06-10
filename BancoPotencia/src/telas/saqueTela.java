@@ -31,6 +31,7 @@ public class saqueTela extends javax.swing.JFrame {
     ResultSet rs;
     Conta conta;
     menuPrincipal menu;
+    Conta conta1 = new Conta();
 
     /**
      * Creates new form saqueTela
@@ -179,6 +180,7 @@ public class saqueTela extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
             }
+            conta1.adicionarTransacoes(conta.getIdConta(),conta.getIdConta(),0,"saque","debito",valorSaque);
             JOptionPane.showMessageDialog(null, "Saque realizado com sucesso. Novo saldo: " + novoSaldo);
             jLabelValorSaldo.setText(Double.toString(conta.getSaldo()));
         } else {

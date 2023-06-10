@@ -5,7 +5,6 @@
  */
 package bancopotencia;
 import telas.telaLogin;
-import javax.swing.JOptionPane;
 /**
  *
  * @author dpits

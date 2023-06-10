@@ -30,6 +30,7 @@ public class poupancaTela extends javax.swing.JFrame {
     Statement st;
     ResultSet rs;
     ContaPoupanca c1;
+    Conta conta1 = new Conta();
     /**
      * Creates new form poupancaTela
      */
@@ -203,38 +204,42 @@ public class poupancaTela extends javax.swing.JFrame {
     private void jButtonAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAplicarActionPerformed
         Conta conta = Sessao.getInstance().getUsuario();
         double aplicacao = Double.parseDouble(jValorAplicar.getText());
+        if(jValorAplicar.equals("")) {
+            if(aplicacao > 0 && aplicacao <= conta.getSaldo()){
+                double novoSaldoP = aplicacao + c1.getRendimentos();
+                double novoSaldoC = conta.getSaldo() - aplicacao;
 
-        if(aplicacao > 0 && aplicacao < conta.getSaldo()){
-            double novoSaldoP = aplicacao + c1.getRendimentos();
-            double novoSaldoC = conta.getSaldo() - aplicacao;
-            
-            conta.setSaldo(novoSaldoC);
-            try {
-                c1.setRendimentos(novoSaldoP);
-            } catch (SQLException ex) {
-                Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+                conta.setSaldo(novoSaldoC);
+                try {
+                    c1.setRendimentos(novoSaldoP);
+                } catch (SQLException ex) {
+                    Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                jLabelValorSaldo1.setText(Double.toString(conta.getSaldo()));
+                jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
+                int id = c1.getIdContaPoupanca();
+                connected = con1.getConnection();
+                String sql = "UPDATE banco_potencia.contapoupanca SET rendimentos = '"+c1.getRendimentos()+"' WHERE (id_conta_poupanca = '"+c1.getIdContaPoupanca()+"')";
+                try {
+                    st.executeUpdate(sql);
+                } catch (SQLException ex) {
+                    Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                String sql2 = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
+                try {
+                    st.executeUpdate(sql2);
+                } catch (SQLException ex) {
+                    Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                conta1.adicionarTransacoes(conta.getIdConta(),conta.getIdConta(),c1.getIdContaPoupanca(),"poupanca_aplicar","debito",aplicacao);
+                JOptionPane.showMessageDialog(null, "Aplicacao realizado com sucesso. Novo saldo: " + novoSaldoC);
+
+            }else{
+                JOptionPane.showMessageDialog(null, "Sem saldo");
             }
-            
-            jLabelValorSaldo1.setText(Double.toString(conta.getSaldo()));
-            jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
-            int id = c1.getIdContaPoupanca();
-            connected = con1.getConnection();
-            String sql = "UPDATE banco_potencia.contapoupanca SET rendimentos = '"+c1.getRendimentos()+"' WHERE (id_conta_poupanca = '"+c1.getIdContaPoupanca()+"')";
-            try {
-                st.executeUpdate(sql);
-            } catch (SQLException ex) {
-                Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            String sql2 = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
-            try {
-                st.executeUpdate(sql2);
-            } catch (SQLException ex) {
-                Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            JOptionPane.showMessageDialog(null, c1.getRendimentos());
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "Tas liso é ?");
+        } else {
+            JOptionPane.showMessageDialog(null, "Preencha o campo de aplicação");
         }
     }//GEN-LAST:event_jButtonAplicarActionPerformed
 
@@ -242,39 +247,41 @@ public class poupancaTela extends javax.swing.JFrame {
         // TODO add your handling code here:
         Conta conta = Sessao.getInstance().getUsuario();
         double resgate = Double.parseDouble(jValorResgatar.getText());
+        
+        if(jValorResgatar.equals("")) {
+            if(resgate > 0 && c1.getRendimentos() >= resgate){
+                double novoSaldoP = c1.getRendimentos()- resgate  ;
+                double novoSaldoC = resgate + conta.getSaldo() ;
 
-        if(resgate > 0 && c1.getRendimentos() > resgate){
-            double novoSaldoP = c1.getRendimentos()- resgate  ;
-            double novoSaldoC = resgate + conta.getSaldo() ;
-            
-            conta.setSaldo(novoSaldoC);
+                conta.setSaldo(novoSaldoC);
 
-            try {
-                c1.setRendimentos(novoSaldoP);
-            } catch (SQLException ex) {
-                Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                try {
+                    c1.setRendimentos(novoSaldoP);
+                } catch (SQLException ex) {
+                    Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-            connected = con1.getConnection();
-            String sql = "UPDATE banco_potencia.contapoupanca SET rendimentos = "+c1.getRendimentos()+" WHERE (id_conta_poupanca = "+c1.getIdContaPoupanca()+")";
-            try {
-                st.executeUpdate(sql);
-            } catch (SQLException ex) {
-                Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+                connected = con1.getConnection();
+                String sql = "UPDATE banco_potencia.contapoupanca SET rendimentos = "+c1.getRendimentos()+" WHERE (id_conta_poupanca = "+c1.getIdContaPoupanca()+")";
+                try {
+                    st.executeUpdate(sql);
+                } catch (SQLException ex) {
+                    Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                String sql2 = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
+                try {
+                    st.executeUpdate(sql2);
+                } catch (SQLException ex) {
+                    Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                conta1.adicionarTransacoes(conta.getIdConta(),conta.getIdConta(),c1.getIdContaPoupanca(),"poupanca_resgatar","credito",resgate);
+                jLabelValorSaldo1.setText(Double.toString(conta.getSaldo()));
+                jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
+                JOptionPane.showMessageDialog(null, "Resgate realizado com sucesso. Novo saldo: " + novoSaldoC);
+
+            }else{
+                JOptionPane.showMessageDialog(null, "Digite um valor válido.");
             }
-            String sql2 = "UPDATE banco_potencia.contacorrente SET saldo = "+conta.getSaldo()+" WHERE (id_conta_corrente = "+conta.getIdConta()+")";
-            try {
-                st.executeUpdate(sql2);
-            } catch (SQLException ex) {
-                Logger.getLogger(poupancaTela.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            jLabelValorSaldo1.setText(Double.toString(conta.getSaldo()));
-            jLabelValorSaldo.setText(Double.toString(c1.getRendimentos()));
-            JOptionPane.showMessageDialog(null, c1.getRendimentos());
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "Digite um valor válido.");
         }
     }//GEN-LAST:event_jButtonResgatarActionPerformed
 

@@ -4,17 +4,13 @@
  * and open the template in the editor.
  */
 package telas;
-import bancopotencia.BancoPotencia;
 import connection.Conection;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *

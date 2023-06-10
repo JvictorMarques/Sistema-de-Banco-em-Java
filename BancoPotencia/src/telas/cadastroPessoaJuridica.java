@@ -323,8 +323,6 @@ public class cadastroPessoaJuridica extends javax.swing.JFrame {
         String controle_acionario = jTextCadJuControleAcionario.getText();
         String senha = jPasswordSenha.getText();
         String confirmar_senha = jPasswordConfirmaSenha.getText();
-        String tipo_conta = "juridica";
-        double saldo = 0;
         try {
             if(razao_social.equals("") || data_abertura.equals("") || cnpj.equals("") || cep.equals("") || rua.equals("") || numero.equals("") || cidade.equals("") || estado.equals("") || email.equals("") || contato1.equals("") || contato2.equals("") || senha.equals("") || confirmar_senha.equals("")  || nome_fantasia.equals("")  || atividade_economica.equals("") || grupo_economico.equals("") || controle_acionario.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos os campos são de preenchimento obrigatório");

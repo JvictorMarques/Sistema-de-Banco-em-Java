@@ -2,23 +2,17 @@ package bancopotencia;
 import connection.Conection;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.awt.HeadlessException;
 import java.sql.SQLException;
-import java.util.Date;
 
 public class ContaPoupanca extends Conta {
     private int idContaPoupanca;
 
-<<<<<<< HEAD
     Conection con1=new Conection(); 
     Connection connected;
     Statement st;
     ResultSet rs;
 
-=======
->>>>>>> 82e68557679efbd0feab31e92ca1db5a608c57ae
     public int getIdContaPoupanca() {
         return idContaPoupanca;
     }

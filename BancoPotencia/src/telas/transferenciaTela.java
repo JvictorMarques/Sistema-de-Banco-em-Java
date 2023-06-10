@@ -28,6 +28,7 @@ public class transferenciaTela extends javax.swing.JFrame {
     ResultSet rs;
     Sessao sessao;
     Conta conta;
+    Conta conta1 = new Conta();
     /**
      * Creates new form transferenciaTela
      */
@@ -185,8 +186,8 @@ public class transferenciaTela extends javax.swing.JFrame {
                     conta.setSaldo(novoSaldo);
                     String sql = "UPDATE banco_potencia.contacorrente SET saldo = '"+saldoDestino+"' WHERE (id_conta_corrente = '"+id_conta+"')";
                     st.executeUpdate(sql);
-                    
-                    JOptionPane.showMessageDialog(null,"transferencia com sucesso");
+                    conta1.adicionarTransacoes(id_conta,conta.getIdConta(),0,"transferencia","debito",saldoDestino);
+                    JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso. Novo saldo: " + saldoDestino);
                     jLabelValorSaldo.setText(Double.toString(conta.getSaldo()));
                     
                 }else{
