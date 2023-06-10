@@ -26,7 +26,6 @@ public class menuPrincipal extends javax.swing.JFrame {
     extratoTela extrato;
     Conection con1=new Conection(); 
     Connection connected;
-    DefaultTableModel modelo;
     Statement st;
     ResultSet rs;
     Conta conta;
