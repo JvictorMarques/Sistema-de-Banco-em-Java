@@ -189,8 +189,10 @@ public class transferenciaTela extends javax.swing.JFrame {
                         double saldoDestino = saldoBanco + digita;
                         double novoSaldo = conta.getSaldo() - digita;
                         conta.setSaldo(novoSaldo);
-                        String sql = "UPDATE banco_potencia.contacorrente SET saldo = '"+saldoDestino+"' WHERE (id_conta_corrente = '"+id_conta+"')";
+                        String sql = "UPDATE banco_potencia.contacorrente SET saldo = '"+conta.getSaldo()+"' WHERE (id_conta_corrente = '"+conta.getIdConta()+"')";
                         st.executeUpdate(sql);
+                        String sql2 = "UPDATE banco_potencia.contacorrente SET saldo = '"+saldoDestino+"' WHERE (id_conta_corrente = '"+id_conta+"')";
+                        st.executeUpdate(sql2);
                         conta1.adicionarTransacoes(id_conta,conta.getIdConta(),0,"transferencia","debito",digita);
                         JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso. Novo saldo: " + conta.getSaldo());
                         jLabelValorSaldo.setText(Double.toString(conta.getSaldo()));
@@ -205,7 +207,6 @@ public class transferenciaTela extends javax.swing.JFrame {
             System.err.println("Erro ao estabelecer a conexão com o banco de dados. Erro: " + e);
         }
         }
-        
     }//GEN-LAST:event_jButtonTransferirActionPerformed
 
     private void jTextFieldValorTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorTransferenciaActionPerformed

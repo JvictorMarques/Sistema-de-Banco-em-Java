@@ -184,7 +184,7 @@ public class saqueTela extends javax.swing.JFrame {
                         Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     conta1.adicionarTransacoes(conta.getIdConta(),conta.getIdConta(),0,"saque","debito",valorSaque);
-                    JOptionPane.showMessageDialog(null, "Saque realizado com sucesso. Novo saldo: " + novoSaldo);
+                    JOptionPane.showMessageDialog(null, "Deposito realizado com sucesso. Novo saldo: " + novoSaldo);
                     jLabelValorSaldo.setText(Double.toString(conta.getSaldo()));
                 } else {
                     JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
