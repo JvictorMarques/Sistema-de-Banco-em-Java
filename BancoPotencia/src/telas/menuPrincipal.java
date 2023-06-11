@@ -37,7 +37,6 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         initComponents();
         setLocationRelativeTo(null); 
-        atualizaSaldo();
     }
     /**
      * This method is called from within the constructor to initialize the form.
