@@ -137,7 +137,7 @@ public class depositoTela extends javax.swing.JFrame {
                     Logger.getLogger(saqueTela.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 conta1.adicionarTransacoes(conta.getIdConta(),conta.getIdConta(),0,"deposito","credito",valor);
-                JOptionPane.showMessageDialog(null, "Saque realizado com sucesso. Novo saldo: " + valor);
+                JOptionPane.showMessageDialog(null, "Saque realizado com sucesso. Novo saldo: " + conta.getSaldo());
             }else{
                 JOptionPane.showMessageDialog(null,"erro no deposito");
             }
