@@ -19,10 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Elder
- */
+
 public class poupancaTela extends javax.swing.JFrame {
     
     Conection con1=new Conection(); 

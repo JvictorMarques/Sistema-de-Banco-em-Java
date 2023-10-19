@@ -12,10 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Elder
- */
+
 public class telaLogin extends javax.swing.JFrame {
     menuPrincipal menu;
     confirmaCadastro ConfirmaCadastro;

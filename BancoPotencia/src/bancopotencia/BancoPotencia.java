@@ -5,10 +5,7 @@
  */
 package bancopotencia;
 import telas.telaLogin;
-/**
- *
- * @author dpits
- */
+
 public class BancoPotencia {
 
     /**

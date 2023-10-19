@@ -1,10 +1,7 @@
 
 package bancopotencia;
 
-/**
- *
- * @author wgsor
- */
+
 import java.util.ArrayList;
 
 public class Cliente {

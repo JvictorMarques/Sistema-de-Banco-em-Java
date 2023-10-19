@@ -5,10 +5,7 @@
  */
 package telas;
 
-/**
- *
- * @author Elder
- */
+
 public class confirmaCadastro extends javax.swing.JFrame {
 
     /**

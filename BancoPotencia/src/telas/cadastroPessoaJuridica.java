@@ -14,10 +14,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Elder
- */
+
 public class cadastroPessoaJuridica extends javax.swing.JFrame {
     confirmaCadastro ConfirmaCadastro;
     Conection con1=new Conection(); 

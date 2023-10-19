@@ -11,10 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-/**
- *
- * @author Elder
- */
+
 public class menuPrincipal extends javax.swing.JFrame {
     saqueTela saque;
     transferenciaTela transferencia;

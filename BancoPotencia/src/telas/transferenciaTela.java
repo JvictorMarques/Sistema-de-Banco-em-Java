@@ -17,10 +17,7 @@ import java.sql.Statement;
 import bancopotencia.Sessao;
 import bancopotencia.Conta;
 
-/**
- *
- * @author Elder
- */
+
 public class transferenciaTela extends javax.swing.JFrame {
     Conection con1=new Conection(); 
     Connection connected;

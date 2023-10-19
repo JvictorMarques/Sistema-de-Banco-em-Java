@@ -5,10 +5,7 @@
  */
 package bancopotencia;
 
-/**
- *
- * @author Elder
- */
+
 public class Sessao {
     private static Sessao instance = null;
    private Conta conta;

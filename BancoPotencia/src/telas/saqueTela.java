@@ -20,10 +20,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Elder
- */
+
 public class saqueTela extends javax.swing.JFrame {
     Conection con1=new Conection(); 
     Connection connected;
