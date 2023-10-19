@@ -4,8 +4,8 @@ Este projeto consiste em uma simulação de um sistema bancário desenvolvido em
 
 Configuração do Ambiente
 Caso o usuário tenha modificado a porta ou a senha, pode ser necessário ajustar os dados de conexão.
-É essencial iniciar os serviços do Apache e MySQL no XAMPP e importar a tabela disponível no repositório do GitHub.
-Certifique-se de que o nome da tabela seja: banco_potencia.
+É essencial iniciar os serviços do Apache e MySQL no XAMPP e importar a database disponível no repositório do GitHub.
+Certifique-se de que o nome da database seja: banco_potencia.
 Em caso de qualquer movimentação, o usuário deve atualizar o saldo.
 Dependências
 Para executar o projeto, são necessárias as seguintes dependências:
